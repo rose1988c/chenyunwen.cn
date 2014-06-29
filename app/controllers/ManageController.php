@@ -8,6 +8,7 @@
  * @logs: 
  *       
  */
+use \Service\Common\Util as Util;
 class ManageController extends BaseController
 {
     protected $layout = 'layouts.manage';
@@ -15,7 +16,7 @@ class ManageController extends BaseController
     
     public function __construct()
     {
-        
+        Util::echoAuthor();
     }
     
     public function index()
