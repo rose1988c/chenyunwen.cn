@@ -1,41 +1,25 @@
-# Object files
-*.o
-*.ko
+########################
+## Project
+########################
 
-# Libraries
-*.lib
-*.a
-
-# Shared objects (inc. Windows DLLs)
-*.dll
-*.so
-*.so.*
-*.dylib
-
-# Executables
-*.exe
-*.out
-*.app
+[Rr]obots.txt
 
 ########################
 ## Environnement
 ########################
- 
+
 # Windows image file caches
 Thumbs.db
- 
+
 # Folder config file
 Desktop.ini
- 
+
 # Mac crap
 .DS_Store
- 
+
 /bootstrap/compiled.php
 /vendor
 composer.phar
 composer.lock
 .DS_Store
 Thumbs.db
-
-/app/storage
-/public/.htaccess
