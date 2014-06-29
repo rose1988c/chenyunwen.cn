@@ -17,8 +17,11 @@ Desktop.ini
 # Mac crap
 .DS_Store
 
+/app/storage
+/public/.htaccess
 /bootstrap/compiled.php
 /vendor
+
 composer.phar
 composer.lock
 .DS_Store
