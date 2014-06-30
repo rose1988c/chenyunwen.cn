@@ -19,6 +19,10 @@ if (!defined('DOC_ROOT')) {
 |
 */
 require DOC_ROOT . '/vendor/autoload.php';
+
+// 添加命名空间扩展点
+$loader = require DOC_ROOT.'/vendor/autoload.php';
+$loader->set('', DOC_ROOT . '/app/src');
 /*
 |--------------------------------------------------------------------------
 | Include The Compiled Class File

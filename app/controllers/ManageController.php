@@ -16,7 +16,7 @@ class ManageController extends BaseController
     
     public function __construct()
     {
-        Util::echoAuthor();
+        
     }
     
     public function index()

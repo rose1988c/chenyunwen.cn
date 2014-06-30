@@ -17,12 +17,18 @@ Desktop.ini
 # Mac crap
 .DS_Store
 
-/app/storage
+##/vendor
+##/bootstrap/compiled.php
+
+/app/storage/cache
+/app/storage/logs
+/app/storage/meta
+/app/storage/sessions
+/app/storage/views
+
 /public/.htaccess
-/bootstrap/compiled.php
-/vendor
 
 composer.phar
 composer.lock
-.DS_Store
-Thumbs.db
+
+.project
