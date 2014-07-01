@@ -47,7 +47,6 @@
                     
                     <h3 class="nomargin">注册</h3>
                     <p class="mt5 mb20">已有账号? <a href="{{url('/login')}}"><strong>登录</strong></a></p>
-                    
                                         
                     <div class="mb10">
                     {{-- include the errors partial --}}

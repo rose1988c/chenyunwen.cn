@@ -1,5 +1,6 @@
 
 CREATE DATABASE IF NOT EXISTS mcc_manage default charset utf8 COLLATE utf8_general_ci; 
+use mcc_manage;
 
 #菜单表
 CREATE TABLE IF NOT EXISTS `mcc_menu` (
@@ -49,7 +50,3 @@ CREATE TABLE IF NOT EXISTS `mcc_role_panel` (
     key `idx_rmid` (`menuid`, `roleid`)
 )engine=INNODB charset=utf8;
 
-
-# 
-INSERT INTO `mcc_manage`.`mcc_menu` (`id`, `parentid`, `name`, `enname`, `url`, `icons`, `sorts`, `exten`, `created_at`, `updated_at`) VALUES ('1', '0', '首页', 'index', 'index', 'fa-home', '100', '', NULL, NULL);
-INSERT INTO `mcc_manage`.`mcc_menu` (`id`, `parentid`, `name`, `enname`, `url`, `icons`, `sorts`, `exten`, `created_at`, `updated_at`) VALUES ('2', '1', '用户', 'user', 'user', 'fa-users', '0', '', NULL, NULL);

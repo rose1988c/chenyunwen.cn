@@ -1,4 +1,5 @@
 <?php
+use Illuminate\Support\Facades\Input;
 /**
  * AccountController.php
  * 
@@ -14,6 +15,7 @@ class AccountController extends BaseController
     
     public function signup()
     {
+        $this->layout->with('title', '用户注册');
         if (Request::server('REQUEST_METHOD') == 'POST')
         {
             // rules
@@ -51,18 +53,17 @@ class AccountController extends BaseController
             }
             
         } else {
-            $this->layout->with('title', '用户注册');
             $this->layout->content = View::make('account.signup');
         }
     }
     
     public function login() {
+        $this->layout->with('title', '用户登录');
         
         if (Request::server('REQUEST_METHOD') == 'POST')
         {
             $rules = array (
                 'username' => 'required',
-                'email' => 'required',
                 'password' => 'required' 
             );
             $messages = array (
@@ -71,38 +72,26 @@ class AccountController extends BaseController
             $validator = Validator::make(Input::all(), $rules, $messages);
             
             if($validator->fails()) {
-                return Redirect::to(urls::absolute('/login'))->withErrors($validator)->withInput();
+                return Redirect::to('login')->withErrors($validator)->withInput();
             }
             
-            $user = $this->authUser(Input::get('email'), Input::get('password'));
+            // 验证
+            $username = HTML::entities( Input::get('username', false) );
+            $password = Input::get('password', false);
+            $remember = Input::get('remember', 0);
+            $remember = $remember ? true : false;
             
-            if($user) {
-                // guard 应干的事。。。。先hacker吧
-                // 登录
-                Session::put('login_user', $user);
-                $user = new \Guard\Auth\User($user);
-                Auth::login($user);
-            }
-            return Redirect::to(route('index'));
+            Auth::attempt(array('username' => $username, 'password' => $password), $remember);
+            
+            return Redirect::intended('/');
+            
         } else {
-            $this->layout->with('title', '用户登录');
             $this->layout->content = View::make('account.login');
-        }
-    }
-
-    private function authUser($email, $password) {
-        $user = GameUserModel::whereRaw('username = ? ', array (
-            $email 
-        ))->first();
-        if(is_object($user) && Hash::check($password, $user->password)) {
-            return $user->toArray();
-        } else {
-            return false;
         }
     }
 
     public function logout() {
         Auth::logout();
-        return Redirect::to(urls::absolute());
+        return Redirect::intended('/');
     }
 }
