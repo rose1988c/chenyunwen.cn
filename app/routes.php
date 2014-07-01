@@ -16,5 +16,6 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
-
 Route::get('/', array('as'=>'index', 'uses' => 'ManageController@index'));
+Route::get('/user', array('as'=>'user','uses' => 'UserController@userList'));
+Route::get('/env', function(){return app::environment();});

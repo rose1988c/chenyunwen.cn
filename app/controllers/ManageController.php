@@ -8,21 +8,14 @@
  * @logs: 
  *       
  */
-use \Service\Common\Util as Util;
 class ManageController extends BaseController
 {
     protected $layout = 'layouts.manage';
     protected $data = array();
     
-    public function __construct()
-    {
-        
-    }
-    
     public function index()
     {
-        $this->data['title'] = '后台管理';
-        
-        $this->layout->content = View::make('manage.index')->with($this->data);
+        $this->layout->with('title', '后台管理');
+        $this->layout->content = View::make('manage.index');
     }
 }
