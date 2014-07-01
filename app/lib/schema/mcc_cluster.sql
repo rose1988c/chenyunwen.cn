@@ -21,6 +21,7 @@ CREATE TABLE IF NOT EXISTS `mcc_user` (
   `username` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
   `truename` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT '',
   `nickname` varchar(255) DEFAULT NULL,
   `roleid` tinyint(3) not null default 2,
   `created_at` datetime DEFAULT NULL,

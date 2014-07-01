@@ -17,7 +17,7 @@ class HomeController extends BaseController {
 
 	public function index()
 	{
-		return 'hello';
+		return 'hello, everybody!';
 	}
 
 }

@@ -11,7 +11,6 @@ This is an Manage System for Laravel 4.
     "require": {
         "laravel/laravel":"4.1",
         "way/generators": "2.*",
-        "frozennode/administrator": "dev-master",
         "guzzlehttp/guzzle": "~4.0"
     }
 }

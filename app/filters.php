@@ -35,7 +35,7 @@ App::after(function($request, $response)
 
 Route::filter('auth', function()
 {
-	if (Auth::guest()) return Redirect::guest('login');
+    if (Auth::guest()) return Redirect::guest('login' . '?redirect_uri=' . Request::fullUrl());
 });
 
 
@@ -77,4 +77,9 @@ Route::filter('csrf', function()
 	{
 		throw new Illuminate\Session\TokenMismatchException;
 	}
+});
+
+Route::filter('dev', function()
+{
+    if (app()->environment() != 'dev') return Redirect::to(route('index'));
 });
