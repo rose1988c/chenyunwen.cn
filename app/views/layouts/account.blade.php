@@ -44,14 +44,14 @@
 
 <script src="{{asset('/assets/bracket/js/jquery.validate.min.js')}}"></script>
 <script type="text/javascript">
-    $("form").validate({
-        highlight: function(element) {
-          $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
-        },
-        success: function(element) {
-          $(element).closest('.form-group').removeClass('has-error');
-        }
-    });
+//     $("form").validate({
+//         highlight: function(element) {
+//           $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+//         },
+//         success: function(element) {
+//           $(element).closest('.form-group').removeClass('has-error');
+//         }
+//     });
 </script>
 </body>
 </html>

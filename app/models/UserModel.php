@@ -40,32 +40,19 @@ class UserModel extends Eloquent implements RemindableInterface, UserInterface
         return $this->attributes['password'];
     }
 
-	/* (non-PHPdoc)
-     * @see \Illuminate\Auth\UserInterface::getRememberToken()
-     */
     public function getRememberToken()
     {
-        // TODO Auto-generated method stub
-        
+        return $this->remember_token;
     }
-
-	/* (non-PHPdoc)
-     * @see \Illuminate\Auth\UserInterface::setRememberToken()
-     */
+    
     public function setRememberToken($value)
     {
-        // TODO Auto-generated method stub
-        
+        $this->remember_token = $value;
     }
-
-	/* (non-PHPdoc)
-     * @see \Illuminate\Auth\UserInterface::getRememberTokenName()
-     */
+    
     public function getRememberTokenName()
     {
-        // TODO Auto-generated method stub
-        
+        return 'remember_token';
     }
-
 
 }

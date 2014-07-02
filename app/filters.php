@@ -38,6 +38,18 @@ Route::filter('auth', function()
     if (Auth::guest()) return Redirect::guest('login');
 });
 
+Route::filter('auth.manage', function()
+{
+    if (Auth::guest()) {
+        return Redirect::guest('login');
+    } else {
+        if (Auth::user()->roleid < USER_ROLE_ADMIN )
+        {
+            return Redirect::to('logwait');
+        }
+    }
+});
+
 
 Route::filter('auth.basic', function()
 {

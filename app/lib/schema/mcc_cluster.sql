@@ -17,20 +17,22 @@ CREATE TABLE IF NOT EXISTS `mcc_menu` (
     primary key (`id`)
 )engine=INNODB charset=utf8;
 
-CREATE TABLE IF NOT EXISTS `mcc_user` (
+CREATE TABLE `mcc_user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
   `truename` varchar(255) DEFAULT NULL,
-  `email` varchar(255) DEFAULT '',
   `nickname` varchar(255) DEFAULT NULL,
-  `roleid` tinyint(3) not null default 2,
+  `roleid` tinyint(3) NOT NULL DEFAULT '2',
+  `ip` varchar(50) DEFAULT NULL,
+  `remember_token` varchar(255) DEFAULT NULL,
+  `login_at` datetime DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   `deleted_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
-
+) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `mcc_role` (
 `id` tinyint(3) unsigned not null auto_increment,

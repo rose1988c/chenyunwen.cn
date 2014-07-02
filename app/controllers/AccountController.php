@@ -1,5 +1,4 @@
 <?php
-use Illuminate\Support\Facades\Input;
 /**
  * AccountController.php
  * 
@@ -44,12 +43,21 @@ class AccountController extends BaseController
                 'email' => $email,
             );
             
-            //TODO username or email exits
-            $user = UserModel::create($data);
+            $isexits = UserModel::where('username', $username)->orWhere('email', $email)->count();
             
-            if ($user) 
-            {
-                return Redirect::to(url('/login'));
+            if (!$isexits){
+                $user = UserModel::create($data);
+                if ($user) 
+                {
+                    Session::flash('flash_success', '注册成功!');
+                    return Redirect::to(url('/login'));
+                } else {
+                    Session::flash('flash_error', '注册失败!');
+                    return Redirect::to('signup');
+                }
+            } else {
+                Session::flash('flash_error', '注册失败, 账号已存在!');
+                return Redirect::to('signup');
             }
             
         } else {
@@ -81,9 +89,13 @@ class AccountController extends BaseController
             $remember = Input::get('remember', 0);
             $remember = $remember ? true : false;
             
-            Auth::attempt(array('username' => $username, 'password' => $password), $remember);
-            
-            return Redirect::intended('/');
+            if (Auth::attempt(array('username' => $username, 'password' => $password), $remember))
+            {
+                return Redirect::intended('/');
+            } else {
+                Session::flash('flash_notice', '用户或密码错误!');
+                return Redirect::to('/login');
+            } 
             
         } else {
             $this->layout->content = View::make('account.login');
@@ -93,5 +105,11 @@ class AccountController extends BaseController
     public function logout() {
         Auth::logout();
         return Redirect::intended('/');
+    }
+    
+    public function logwait()
+    {
+        $this->layout->with('title', '访问后台需管理员审核');
+        $this->layout->content = View::make('account.wait');
     }
 }

@@ -63,10 +63,10 @@
                         <input type="password" name="password" required class="form-control" />
                     </div>
                     
-                    <div class="mb10 form-group">
-                        <label class="control-label">密码确认<span class="asterisk">*</span></label>
-                        <input type="password" required class="form-control" />
-                    </div>
+<!--                     <div class="mb10 form-group"> -->
+<!--                         <label class="control-label">密码确认<span class="asterisk">*</span></label> -->
+<!--                         <input type="password" required class="form-control" /> -->
+<!--                     </div> -->
                     
                     <div class="mb10 form-group">
                         <label class="control-label">邮箱地址<span class="asterisk">*</span></label>

@@ -46,7 +46,7 @@
             <div class="media userlogged">
                 <img alt="" src="{{asset('/assets/bracket/images/photos/loggeduser.png')}}" class="media-object">
                 <div class="media-body">
-                    <h4>{{Session::get('adminInfos')['name']}}</h4>
+                    <h4>{{Auth::user()->username}}</h4>
                     <span>"Life is so..."</span>
                 </div>
             </div>
@@ -258,14 +258,14 @@
             <div class="btn-group">
               <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                 <img src="{{asset('/assets/bracket/images/photos/loggeduser.png')}}" alt="" />
-                {{Session::get('adminInfos')['name']}}
+                {{Auth::user()->username}}
                 <span class="caret"></span>
               </button>
               <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
                 <li><a href=""><i class="glyphicon glyphicon-user"></i> 我的信息</a></li>
                 <li><a href=""><i class="glyphicon glyphicon-cog"></i> 账户设置</a></li>
                 <li><a href=""><i class="glyphicon glyphicon-question-sign"></i> 帮助</a></li>
-                <li><a href="{{---route('logout')---}}"><i class="glyphicon glyphicon-log-out"></i> 退出</a></li>
+                <li><a href="{{url('logout')}}"><i class="glyphicon glyphicon-log-out"></i> 退出</a></li>
               </ul>
             </div>
           </li>

@@ -9,7 +9,7 @@
 Route::get('/', array('as'=>'index', 'uses' => 'HomeController@index'));
 
 // 后台管理
-Route::group(array('prefix' => 'manage', 'before' => 'auth'),function() {
+Route::group(array('prefix' => 'manage', 'before' => 'auth.manage'),function() {
     Route::get('/user', array('as'=>'user','uses' => 'UserController@userList'));
     Route::get('/', array('as'=>'manage','uses' => 'ManageController@index'));
 });
@@ -24,3 +24,4 @@ Route::group(array('before' => 'dev'), function()
 Route::any('/login',  array('as'=>'login','uses' => 'AccountController@login'));
 Route::any('/signup', array('as'=>'signup','uses' => 'AccountController@signup'));
 Route::get('/logout', 'AccountController@logout');
+Route::any('/logwait',  'AccountController@logwait');

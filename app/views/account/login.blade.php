@@ -27,21 +27,21 @@
             
             <div class="col-md-5">
                 
-                <form method="post" action="<?php echo Request::server('REQUEST_URI');?>" onsubmit="return bindSubmitEvent(this);">
+                <form method="post" action="<?php echo Request::server('REQUEST_URI');?>">
                     <h4 class="nomargin">登录</h4>
                     <p class="mt5 mb20">登录到你的账户.</p>
                     <div class="mb10">
                     {{-- include the errors partial --}}
                     @include('partials.errors')
                     </div>
-                    <input type="text" class="form-control uname" name="username" placeholder="用户名" />
-                    <input type="password" class="form-control pword" name="password" placeholder="密码" />
+                    <input type="text" class="form-control uname" name="username" required placeholder="用户名" />
+                    <input type="password" class="form-control pword" name="password" required placeholder="密码" />
                     
                     <div class="mb10">
                         <label for="remember">
                             <input type="checkbox" id="remember" name="remember" value="1" />记住密码
                         </label>
-                        <a class="pull-right" href=""><small>忘记密码 ?</small></a>
+                        <a class="pull-right" href="javascript:void(0);"><small>忘记密码 ?</small></a>
                     </div>
                     
                     <button data-content="" data-container="body" class="btn btn-success btn-block" data-placement="right" type="submit">登录</button>
@@ -64,16 +64,4 @@
 @stop
     
 @section('footer')
-<script type="text/javascript">
-    function bindSubmitEvent(obj)
-    {
-        if (obj.username.value == '') {
-            return false;
-        }
-        if (obj.password.value == '') {
-            return false;
-        }
-        return true;
-    }
-</script>
 @stop
