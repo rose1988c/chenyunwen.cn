@@ -1,8 +1,11 @@
 
+# 创建database
 CREATE DATABASE IF NOT EXISTS mcc_manage default charset utf8 COLLATE utf8_general_ci; 
+
+# 指定
 use mcc_manage;
 
-#菜单表
+# 菜单表
 CREATE TABLE IF NOT EXISTS `mcc_menu` (
     `id` smallint(6) unsigned not null auto_increment,
     `parentid` smallint(6) unsigned not null default 0 COMMENT '父级ID',
@@ -17,6 +20,7 @@ CREATE TABLE IF NOT EXISTS `mcc_menu` (
     primary key (`id`)
 )engine=INNODB charset=utf8;
 
+# 用户表
 CREATE TABLE `mcc_user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(255) DEFAULT NULL,
@@ -51,4 +55,17 @@ CREATE TABLE IF NOT EXISTS `mcc_role_panel` (
     primary key (`id`),
     key `idx_rmid` (`menuid`, `roleid`)
 )engine=INNODB charset=utf8;
+
+# 用户操作日志表
+CREATE TABLE `mcc_action_log` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) DEFAULT NULL,
+  `ip` varchar(255) DEFAULT NULL,
+  `method` varchar(255) DEFAULT NULL,
+  `action` varchar(255) DEFAULT NULL,
+  `url` varchar(255) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 

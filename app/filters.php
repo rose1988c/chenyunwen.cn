@@ -19,7 +19,18 @@ App::before(function($request)
 
 App::after(function($request, $response)
 {
-	//
+	//记录 action_log
+    $user = Auth::user();
+    if ($user && Request::isMethod('post') ) {
+        $data = array(
+            'ip' => Request::getClientIp(),
+            'url' => Request::url(),
+            'method' => Request::getMethod(),
+            'action' => Request::path(),
+            'username' => is_object($user) ? $user->username : '',
+        );
+        ActionLogModel::create($data);
+    }
 });
 
 /*
