@@ -15,7 +15,7 @@ class UserModel extends Eloquent implements RemindableInterface, UserInterface
     protected $table = 'mcc_user';
     protected $fillable = array ();
     protected $guarded = array ();
-    protected $hidden = array('password');
+    protected $hidden = array('password', 'remember_token', 'deleted_at');
     
     public function getReminderEmail()
     {

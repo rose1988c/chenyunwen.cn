@@ -15,7 +15,9 @@ class UserController extends BaseController
     
     public function userList()
     {
+        $users = UserModel::all()->toArray();
+        
         $this->layout->with('title', '用户列表');
-        $this->layout->content = View::make('manage.user.list');
+        $this->layout->content = View::make('manage.user.list')->with(compact('users'));
     }
 }
