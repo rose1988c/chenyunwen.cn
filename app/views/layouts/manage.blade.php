@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-    <title>@yield('title')</title>
+    <title>{{$title}}</title>
     <meta name="description" content="@yield('description')"/>
     <meta name="author" content="rose1988.c@gmail.com">
     <meta name="keywords" content="@yield('keywords')"/>
@@ -62,17 +62,19 @@
           
         <h5 class="sidebartitle">Navigation</h5>
         <ul class="nav nav-pills nav-stacked nav-bracket">
+        <?php
+            $parentnav = array();
+            $currentnav = array();
+        ?>
         @foreach ($menu as $value)
-            <li class="{{$value['is_active']}} {{$value['is_parent']}} <?php if ($value['is_active'] && $value['is_parent']) {echo 'nav-active';}?>">
-                <a href="{{$value['url']}}"><i class="fa {{$value['icons']}}"></i> <span>{{$value['name']}}</span></a>
+            <?php if ( $value['nav-active'] ) { $parentnav = $value; } ?>
+            <li class="{{$value['is_active']}} {{$value['is_parent']}} {{$value['nav-active']}}">
+                <a href="{{url($value['url'])}}"><i class="{{$value['icons']}}"></i> <span>{{$value['name']}}</span></a>
                 @if ($value['submenu'])
-                <ul class="children" style="<?php 
-                if($value['is_active']) { 
-                    echo 'display:block;';
-                } 
-                ?>">   
+                <ul class="children" style="<?php if($value['is_active']) { echo 'display:block;'; }?>">
                     @foreach ($value['submenu'] as $val)
-                        <li class="{{$val['is_active']}}"><a href="{{$val['url']}}"><i class="fa fa-caret-right"></i>{{$val['name']}}</a></li>
+                        <?php if ($val['is_active']) { $currentnav = $val; } ?>
+                        <li class="{{$val['is_active']}}"><a href="{{url($val['url'])}}"><i class="fa fa-caret-right"></i>{{$val['name']}}</a></li>
                     @endforeach        
                 </ul>                    
                 @endif
@@ -278,22 +280,29 @@
       </div><!-- header-right -->
       
     </div><!-- headerbar -->
-    
     <div class="pageheader">
       <h2>
-          <i class="fa fa-home"></i> 
-          @yield('module_name') 
-          <span>
-              @yield('module_subname')
-          </span>
+          <i class="{{empty($parentnav) ? : $parentnav['icons']}}"></i>
+          {{empty($parentnav) ? '' : $parentnav['name']}}
+          <?php 
+              if (!empty($currentnav))
+              {
+                  echo '<span>';
+                  echo $currentnav['name'];
+                  echo '</span>';
+              }
+          ?>
       </h2>
-<!--      <div class="breadcrumb-wrapper">
+      
+      <?php /*
+      <div class="breadcrumb-wrapper">
         <span class="label">You are here:</span>
         <ol class="breadcrumb">
-          <li><a href="index.html">Bracket</a></li>
-          <li class="active">Dashboard</li>
+          <li><a href="{{empty($parentnav) ? '' : url($parentnav['url'])}}">{{empty($parentnav) ? : $parentnav['name']}}</a></li>
+          <li class="active">{{empty($currentnav) ? '' : $currentnav['name']}}</li>
         </ol>
-      </div>-->
+      </div>
+      */?>
     </div>
     <?php if (isset($successMessage)) {?>
     <div class="alert alert-success">

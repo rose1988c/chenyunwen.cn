@@ -6,19 +6,18 @@ CREATE DATABASE IF NOT EXISTS mcc_manage default charset utf8 COLLATE utf8_gener
 use mcc_manage;
 
 # 菜单表
-CREATE TABLE IF NOT EXISTS `mcc_menu` (
-    `id` smallint(6) unsigned not null auto_increment,
-    `parentid` smallint(6) unsigned not null default 0 COMMENT '父级ID',
-    `name` varchar(255) not null COMMENT '菜单名',
-    `enname` varchar(255) not null default '' COMMENT '英文名',
-    `url` varchar(255) not null default '' COMMENT 'URL路径',
-    `icons` varchar(100) not null default '' COMMENT '图标class',
-    `sorts` smallint(6) not null default 0 COMMENT '排序号',
-    `exten` varchar(255) not null default '' COMMENT '扩展字段',
-    `created_at` datetime DEFAULT NULL,
-    `updated_at` datetime DEFAULT NULL,
-    primary key (`id`)
-)engine=INNODB charset=utf8;
+CREATE TABLE `mcc_menu` (
+  `id` smallint(6) unsigned NOT NULL AUTO_INCREMENT,
+  `parentid` smallint(6) unsigned NOT NULL DEFAULT '0' COMMENT '父级ID',
+  `name` varchar(255) NOT NULL COMMENT '菜单名',
+  `url` varchar(255) NOT NULL DEFAULT '' COMMENT 'URL路径',
+  `icons` varchar(100) NOT NULL DEFAULT '' COMMENT '图标class',
+  `sorts` smallint(6) NOT NULL DEFAULT '0' COMMENT '排序号',
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
 
 # 用户表
 CREATE TABLE `mcc_user` (

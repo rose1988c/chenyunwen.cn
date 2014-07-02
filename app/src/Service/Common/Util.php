@@ -47,6 +47,27 @@ class Util
         }
         return $result;
     }
+    
+    /**
+     * 根据字段反压缩
+     * 
+     * @param array $array
+     * @param unknown $key
+     * @return multitype:
+     */
+    public static function arrayUnFlatten(array $array, $key) {
+        $nmenu = array();
+        foreach ($array as $k => $value) {
+            if (is_array($value[$key]) && !empty($value[$key])){
+                foreach ((array)$value[$key] as $v) {
+                    $nmenu[] = $v;
+                }
+            }
+            unset($value[$key]);
+            $nmenu[] = $value;
+        }
+        return array_filter($nmenu);
+    }
 
     /**
      * packRawCriteria

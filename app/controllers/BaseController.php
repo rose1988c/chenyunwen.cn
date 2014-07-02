@@ -1,53 +1,74 @@
 <?php
+/**
+ * BaseController.php
+ * 
+ * @author: rose1988c
+ * @email: rose1988.c@gmail.com
+ * @created: 2014-7-2 下午4:55:51
+ * @logs: 
+ *       
+ */
 class BaseController extends Controller
 {
     protected function setupLayout() {
         if( ! is_null($this->layout)) {
-            $menu = $this->initMenu();
             $this->layout = View::make($this->layout, array (
-                'menu' => $menu 
+                'menu' => $this->initMenu()
             ));
         }
     }
 
+    /**
+     * 初始化菜单
+     * 
+     * @return array menu
+     */
     private function initMenu() {
-        $name = strtolower(substr(get_class($this), 0, - 10));
+        //控制器名字
+        //$name = strtolower(substr(get_class($this), 0, - 10));
         
-        //父级
-        $menu = MenuModel::where('parentid', 0)->orWhere('exten', 'page')->orderBy('sorts', 'DESC')->get()->toArray();
+        // 菜单
+        $menu = MenuModel::where('parentid', 0)->orderBy('sorts', 'DESC')->get()->toArray();
+        $menus = \Service\Common\Util::ArrayColumn($menu, 'id', 'id,parentid,name,url,icons');
         
-        $menus = \Service\Common\Util::ArrayColumn($menu, 'id', 'parentid,name,enname,url,icons');
-        
-        foreach($menus as $parentid => &$value) {
-            if($value ['parentid'] == 0) {
-                $value ['is_parent'] = 'nav-parent';
-                $value ['submenu'] = MenuModel::where('parentid', $parentid)->get()->toArray();
+        foreach($menus as $parentid => &$parendval) {
+            // 定义
+            $parendval ['is_active'] = '';
+            $parendval ['is_parent'] = '';
+            $parendval ['nav-active'] = '';
+            
+            // 顶级菜单
+            if($parendval ['parentid'] == 0) {
                 
+                $parendval ['submenu'] = MenuModel::where('parentid', $parentid)->get()->toArray();
+                $parendval ['is_parent'] = empty($parendval ['submenu']) ? '' : 'nav-parent';
                 
-                foreach($value ['submenu'] as &$val) {
-                    if($val ['url']) {
-                        $val ['url'] = route($val ['enname']);
-                    }
-                    if($val ['enname'] === Route::currentRouteName()) {
-                        $val ['is_active'] = 'active';
-                    } else {
-                        $val ['is_active'] = '';
+                // 只有一级处理
+                if (empty($parendval ['submenu']) && $parendval ['url'] === Request::path()) {
+                    $parendval ['is_active'] = 'active';
+                    $parendval ['is_parent'] = 'nav-parent';
+                }
+                
+                // 子菜单
+                foreach($parendval ['submenu'] as &$subval) {
+                    $subval ['is_active'] = '';
+                    if($subval ['url'] === Request::path()) {
+                        $subval ['is_active'] = 'active';
+                        $parendval ['is_active'] = 'active';
                     }
                 }
-                unset($val);
-            } else {
-                $value ['is_parent'] = '';
+                
+                unset($subval);
             }
-            if($value ['enname'] == $name) {
-                $value ['is_active'] = 'active';
-            } else {
-                $value ['is_active'] = '';
+            
+            // nav-active
+            if ($parendval ['is_active'] && $parendval ['is_parent'])
+            {
+                $parendval ['nav-active'] = 'nav-active';
             }
-            if($value ['url']) {
-                $value ['url'] = route($value ['url']);
-            }
+            
         }
-        unset($value);
+        unset($parendval);
         return $menus;
     }
 }
