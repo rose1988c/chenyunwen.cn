@@ -91,6 +91,10 @@ class AccountController extends BaseController
             
             if (Auth::attempt(array('username' => $username, 'password' => $password), $remember))
             {
+                UserModel::where('username', $username)->update(array(
+                    'ip' => Request::getClientIp(),
+                    'login_at' => date('Y-m-d H:i:s', Request::server('REQUEST_TIME')),
+                ));
                 return Redirect::intended('/');
             } else {
                 Session::flash('flash_notice', '用户或密码错误!');
