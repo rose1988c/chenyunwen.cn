@@ -21,6 +21,7 @@ Route::group(array('prefix' => 'manage', 'before' => 'auth.manage'),function() {
     // 用户管理
     Route::group(array('prefix' => 'user'),function() {
         Route::get('list', 'UserController@userList');
+        Route::get('list/ajax', 'UserController@userList_ajax');
     });
 });
 

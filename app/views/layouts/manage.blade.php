@@ -10,8 +10,6 @@
     <link rel="shortcut icon" href="{{asset('assets/images/favicon.png')}}" type="image/png">
 
     {{ HTML::style('assets/bracket/css/style.default.css?' . date("Ymd", time()) . '.css') }}
-    {{ HTML::style('assets/bracket/css/jquery.datatables.css?' . date("Ymd", time()) . '.css') }}
-
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
     <script src="{{asset('assets/bracket/js/html5shiv.js')}}"></script>
@@ -627,6 +625,9 @@
 <script src="{{asset('/assets/bracket/js/jquery.cookies.js')}}"></script>
 <script src="{{asset('/assets/bracket/js/jquery.gritter.min.js')}}"></script>
 <script src="{{asset('/assets/bracket/js/custom.js')}}"></script>
+
+@yield('footer')
+
 <script type="text/javascript">
 function gritterWindows(title, content, class_name) {
     jQuery.gritter.add({
@@ -639,7 +640,5 @@ function gritterWindows(title, content, class_name) {
     });
 }
 </script>
-@yield('footer')
-    
 </body>
 </html>

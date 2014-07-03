@@ -121,9 +121,9 @@ namespace {
 		 * @return \Illuminate\Support\ServiceProvider
 		 * @static 
 		 */
-		 public static function forceRegister($provider, $options = array()){
+		 public static function forgeRegister($provider, $options = array()){
 			//Method inherited from \Illuminate\Foundation\Application
-			return \Illuminate\Foundation\Application::forceRegister($provider, $options);
+			return \Illuminate\Foundation\Application::forgeRegister($provider, $options);
 		 }
 
 		/**
@@ -1486,17 +1486,6 @@ namespace {
 		 }
 
 		/**
-		 * Sets the default Command name.
-		 *
-		 * @param string $commandName The Command name
-		 * @static 
-		 */
-		 public static function setDefaultCommand($commandName){
-			//Method inherited from \Symfony\Component\Console\Application
-			 \Illuminate\Console\Application::setDefaultCommand($commandName);
-		 }
-
-		/**
 		 * Dynamically pass all missing methods to console Artisan.
 		 *
 		 * @param string  $method
@@ -2006,18 +1995,6 @@ namespace {
 		 }
 
 		/**
-		 * Compile the default values for the echo statement.
-		 *
-		 * @param string  $value
-		 * @return string
-		 * @static 
-		 */
-		 public static function compileEchoDefaults($value){
-			//Method inherited from \Illuminate\View\Compilers\BladeCompiler
-			return \Illuminate\View\Compilers\BladeCompiler::compileEchoDefaults($value);
-		 }
-
-		/**
 		 * Register a custom Blade compiler.
 		 *
 		 * @param Closure  $compiler
@@ -2027,6 +2004,18 @@ namespace {
 		 public static function extend($compiler){
 			//Method inherited from \Illuminate\View\Compilers\BladeCompiler
 			 \Illuminate\View\Compilers\BladeCompiler::extend($compiler);
+		 }
+
+		/**
+		 * Compile the default values for the echo statement.
+		 *
+		 * @param string  $value
+		 * @return string
+		 * @static 
+		 */
+		 public static function compileEchoDefaults($value){
+			//Method inherited from \Illuminate\View\Compilers\BladeCompiler
+			return \Illuminate\View\Compilers\BladeCompiler::compileEchoDefaults($value);
 		 }
 
 		/**
@@ -2286,19 +2275,6 @@ namespace {
 		 }
 
 		/**
-		 * Retrieve an item from the cache and delete it.
-		 *
-		 * @param string  $key
-		 * @param mixed   $default
-		 * @return mixed
-		 * @static 
-		 */
-		 public static function pull($key, $default = null){
-			//Method inherited from \Illuminate\Cache\Repository
-			return \Illuminate\Cache\Repository::pull($key, $default);
-		 }
-
-		/**
 		 * Store an item in the cache.
 		 *
 		 * @param string  $key
@@ -2450,56 +2426,16 @@ namespace {
 		 }
 
 		/**
-		 * Register a custom macro.
+		 * Register a macro with the Cache class.
 		 *
 		 * @param string    $name
-		 * @param callable  $macro
+		 * @param callable  $callback
 		 * @return void
 		 * @static 
 		 */
-		 public static function macro($name, $macro){
+		 public static function macro($name, $callback){
 			//Method inherited from \Illuminate\Cache\Repository
-			 \Illuminate\Cache\Repository::macro($name, $macro);
-		 }
-
-		/**
-		 * Checks if macro is registered
-		 *
-		 * @param string    $name
-		 * @return boolean
-		 * @static 
-		 */
-		 public static function hasMacro($name){
-			//Method inherited from \Illuminate\Cache\Repository
-			return \Illuminate\Cache\Repository::hasMacro($name);
-		 }
-
-		/**
-		 * Dynamically handle calls to the class.
-		 *
-		 * @param string  $method
-		 * @param array   $parameters
-		 * @return mixed
-		 * @throws \BadMethodCallException
-		 * @static 
-		 */
-		 public static function __callStatic($method, $parameters){
-			//Method inherited from \Illuminate\Cache\Repository
-			return \Illuminate\Cache\Repository::__callStatic($method, $parameters);
-		 }
-
-		/**
-		 * Dynamically handle calls to the form builder.
-		 *
-		 * @param string  $method
-		 * @param array   $parameters
-		 * @return mixed
-		 * @throws \BadMethodCallException
-		 * @static 
-		 */
-		 public static function macroCall($method, $parameters){
-			//Method inherited from \Illuminate\Cache\Repository
-			return \Illuminate\Cache\Repository::macroCall($method, $parameters);
+			 \Illuminate\Cache\Repository::macro($name, $callback);
 		 }
 
 		/**
@@ -2930,7 +2866,7 @@ namespace {
 		/**
 		 * Remove a cookie from the queue.
 		 *
-		 * @param string $name
+		 * @param $cookieName
 		 * @static 
 		 */
 		 public static function unqueue($name){
@@ -3635,7 +3571,7 @@ namespace {
 		/**
 		 * Get the paginator environment instance.
 		 *
-		 * @return \Illuminate\Pagination\Factory
+		 * @return \Illuminate\Pagination\Environment
 		 * @static 
 		 */
 		 public static function getPaginator(){
@@ -3646,7 +3582,7 @@ namespace {
 		/**
 		 * Set the pagination environment instance.
 		 *
-		 * @param \Illuminate\Pagination\Factory|\Closure  $paginator
+		 * @param \Illuminate\Pagination\Environment|\Closure  $paginator
 		 * @return void
 		 * @static 
 		 */
@@ -3929,22 +3865,6 @@ namespace {
 		 }
 
 		/**
-		 * Get a paginator only supporting simple next and previous links.
-		 * 
-		 * This is more efficient on larger data-sets, etc.
-		 *
-		 * @param \Illuminate\Pagination\Factory  $paginator
-		 * @param int    $perPage
-		 * @param array  $columns
-		 * @return \Illuminate\Pagination\Paginator
-		 * @static 
-		 */
-		 public static function simplePaginate($perPage = null, $columns = array()){
-			//Method inherited from \Illuminate\Database\Eloquent\Builder
-			return \Illuminate\Database\Eloquent\Builder::simplePaginate($perPage, $columns);
-		 }
-
-		/**
 		 * Increment a column's value by a given amount.
 		 *
 		 * @param string  $column
@@ -3970,29 +3890,6 @@ namespace {
 		 public static function decrement($column, $amount = 1, $extra = array()){
 			//Method inherited from \Illuminate\Database\Eloquent\Builder
 			return \Illuminate\Database\Eloquent\Builder::decrement($column, $amount, $extra);
-		 }
-
-		/**
-		 * Run the default delete function on the builder.
-		 *
-		 * @return mixed
-		 * @static 
-		 */
-		 public static function forceDelete(){
-			//Method inherited from \Illuminate\Database\Eloquent\Builder
-			return \Illuminate\Database\Eloquent\Builder::forceDelete();
-		 }
-
-		/**
-		 * Register a replacement for the default delete function.
-		 *
-		 * @param \Closure  $callback
-		 * @return void
-		 * @static 
-		 */
-		 public static function onDelete($callback){
-			//Method inherited from \Illuminate\Database\Eloquent\Builder
-			 \Illuminate\Database\Eloquent\Builder::onDelete($callback);
 		 }
 
 		/**
@@ -4178,31 +4075,6 @@ namespace {
 		 }
 
 		/**
-		 * Extend the builder with a given callback.
-		 *
-		 * @param string  $name
-		 * @param \Closure  $callback
-		 * @return void
-		 * @static 
-		 */
-		 public static function macro($name, $callback){
-			//Method inherited from \Illuminate\Database\Eloquent\Builder
-			 \Illuminate\Database\Eloquent\Builder::macro($name, $callback);
-		 }
-
-		/**
-		 * Get the given macro by name.
-		 *
-		 * @param string  $name
-		 * @return \Closure
-		 * @static 
-		 */
-		 public static function getMacro($name){
-			//Method inherited from \Illuminate\Database\Eloquent\Builder
-			return \Illuminate\Database\Eloquent\Builder::getMacro($name);
-		 }
-
-		/**
 		 * Set the columns to be selected.
 		 *
 		 * @param array  $columns
@@ -4322,36 +4194,6 @@ namespace {
 		 public static function leftJoinWhere($table, $one, $operator, $two){
 			//Method inherited from \Illuminate\Database\Query\Builder
 			return \Illuminate\Database\Query\Builder::leftJoinWhere($table, $one, $operator, $two);
-		 }
-
-		/**
-		 * Add a right join to the query.
-		 *
-		 * @param string  $table
-		 * @param string  $first
-		 * @param string  $operator
-		 * @param string  $second
-		 * @return \Illuminate\Database\Query\Builder|static
-		 * @static 
-		 */
-		 public static function rightJoin($table, $first, $operator = null, $second = null){
-			//Method inherited from \Illuminate\Database\Query\Builder
-			return \Illuminate\Database\Query\Builder::rightJoin($table, $first, $operator, $second);
-		 }
-
-		/**
-		 * Add a "right join where" clause to the query.
-		 *
-		 * @param string  $table
-		 * @param string  $first
-		 * @param string  $operator
-		 * @param string  $two
-		 * @return \Illuminate\Database\Query\Builder|static
-		 * @static 
-		 */
-		 public static function rightJoinWhere($table, $one, $operator, $two){
-			//Method inherited from \Illuminate\Database\Query\Builder
-			return \Illuminate\Database\Query\Builder::rightJoinWhere($table, $one, $operator, $two);
 		 }
 
 		/**
@@ -4696,27 +4538,12 @@ namespace {
 		 * @param string  $column
 		 * @param string  $operator
 		 * @param string  $value
-		 * @param string  $boolean
 		 * @return \Illuminate\Database\Query\Builder|static
 		 * @static 
 		 */
-		 public static function having($column, $operator = null, $value = null, $boolean = 'and'){
+		 public static function having($column, $operator = null, $value = null){
 			//Method inherited from \Illuminate\Database\Query\Builder
-			return \Illuminate\Database\Query\Builder::having($column, $operator, $value, $boolean);
-		 }
-
-		/**
-		 * Add a "or having" clause to the query.
-		 *
-		 * @param string  $column
-		 * @param string  $operator
-		 * @param string  $value
-		 * @return \Illuminate\Database\Query\Builder|static
-		 * @static 
-		 */
-		 public static function orHaving($column, $operator = null, $value = null){
-			//Method inherited from \Illuminate\Database\Query\Builder
-			return \Illuminate\Database\Query\Builder::orHaving($column, $operator, $value);
+			return \Illuminate\Database\Query\Builder::having($column, $operator, $value);
 		 }
 
 		/**
@@ -5038,7 +4865,7 @@ namespace {
 		/**
 		 * Build a paginator instance from a raw result array.
 		 *
-		 * @param \Illuminate\Pagination\Factory  $paginator
+		 * @param \Illuminate\Pagination\Environment  $paginator
 		 * @param array  $results
 		 * @param int    $perPage
 		 * @return \Illuminate\Pagination\Paginator
@@ -5206,7 +5033,7 @@ namespace {
 		 }
 
 		/**
-		 * Get the current query value bindings in a flattened array.
+		 * Get the current query value bindings.
 		 *
 		 * @return array
 		 * @static 
@@ -5217,40 +5044,27 @@ namespace {
 		 }
 
 		/**
-		 * Get the raw array of bindings.
-		 *
-		 * @return array
-		 * @static 
-		 */
-		 public static function getRawBindings(){
-			//Method inherited from \Illuminate\Database\Query\Builder
-			return \Illuminate\Database\Query\Builder::getRawBindings();
-		 }
-
-		/**
 		 * Set the bindings on the query builder.
 		 *
-		 * @param array   $bindings
-		 * @param string  $type
+		 * @param array  $bindings
 		 * @return \Illuminate\Database\Query\Builder
 		 * @static 
 		 */
-		 public static function setBindings($bindings, $type = 'where'){
+		 public static function setBindings($bindings){
 			//Method inherited from \Illuminate\Database\Query\Builder
-			return \Illuminate\Database\Query\Builder::setBindings($bindings, $type);
+			return \Illuminate\Database\Query\Builder::setBindings($bindings);
 		 }
 
 		/**
 		 * Add a binding to the query.
 		 *
-		 * @param mixed   $value
-		 * @param string  $type
+		 * @param mixed  $value
 		 * @return \Illuminate\Database\Query\Builder
 		 * @static 
 		 */
-		 public static function addBinding($value, $type = 'where'){
+		 public static function addBinding($value){
 			//Method inherited from \Illuminate\Database\Query\Builder
-			return \Illuminate\Database\Query\Builder::addBinding($value, $type);
+			return \Illuminate\Database\Query\Builder::addBinding($value);
 		 }
 
 		/**
@@ -5722,7 +5536,7 @@ namespace {
 		 * @return bool
 		 * @static 
 		 */
-		 public static function makeDirectory($path, $mode = 493, $recursive = false, $force = false){
+		 public static function makeDirectory($path, $mode = 511, $recursive = false, $force = false){
 			//Method inherited from \Illuminate\Filesystem\Filesystem
 			return \Illuminate\Filesystem\Filesystem::makeDirectory($path, $mode, $recursive, $force);
 		 }
@@ -6128,6 +5942,19 @@ namespace {
 		 }
 
 		/**
+		 * Register a custom form macro.
+		 *
+		 * @param string    $name
+		 * @param callable  $macro
+		 * @return void
+		 * @static 
+		 */
+		 public static function macro($name, $macro){
+			//Method inherited from \Illuminate\Html\FormBuilder
+			 \Illuminate\Html\FormBuilder::macro($name, $macro);
+		 }
+
+		/**
 		 * Get the ID attribute for a field name.
 		 *
 		 * @param string  $name
@@ -6200,45 +6027,6 @@ namespace {
 		 }
 
 		/**
-		 * Register a custom macro.
-		 *
-		 * @param string    $name
-		 * @param callable  $macro
-		 * @return void
-		 * @static 
-		 */
-		 public static function macro($name, $macro){
-			//Method inherited from \Illuminate\Html\FormBuilder
-			 \Illuminate\Html\FormBuilder::macro($name, $macro);
-		 }
-
-		/**
-		 * Checks if macro is registered
-		 *
-		 * @param string    $name
-		 * @return boolean
-		 * @static 
-		 */
-		 public static function hasMacro($name){
-			//Method inherited from \Illuminate\Html\FormBuilder
-			return \Illuminate\Html\FormBuilder::hasMacro($name);
-		 }
-
-		/**
-		 * Dynamically handle calls to the class.
-		 *
-		 * @param string  $method
-		 * @param array   $parameters
-		 * @return mixed
-		 * @throws \BadMethodCallException
-		 * @static 
-		 */
-		 public static function __callStatic($method, $parameters){
-			//Method inherited from \Illuminate\Html\FormBuilder
-			return \Illuminate\Html\FormBuilder::__callStatic($method, $parameters);
-		 }
-
-		/**
 		 * Dynamically handle calls to the form builder.
 		 *
 		 * @param string  $method
@@ -6307,6 +6095,19 @@ namespace {
 		 public static function __construct($url = null){
 			//Method inherited from \Illuminate\Html\HtmlBuilder
 			 \Illuminate\Html\HtmlBuilder::__construct($url);
+		 }
+
+		/**
+		 * Register a custom HTML macro.
+		 *
+		 * @param string    $name
+		 * @param callable  $macro
+		 * @return void
+		 * @static 
+		 */
+		 public static function macro($name, $macro){
+			//Method inherited from \Illuminate\Html\HtmlBuilder
+			 \Illuminate\Html\HtmlBuilder::macro($name, $macro);
 		 }
 
 		/**
@@ -6541,46 +6342,7 @@ namespace {
 		 }
 
 		/**
-		 * Register a custom macro.
-		 *
-		 * @param string    $name
-		 * @param callable  $macro
-		 * @return void
-		 * @static 
-		 */
-		 public static function macro($name, $macro){
-			//Method inherited from \Illuminate\Html\HtmlBuilder
-			 \Illuminate\Html\HtmlBuilder::macro($name, $macro);
-		 }
-
-		/**
-		 * Checks if macro is registered
-		 *
-		 * @param string    $name
-		 * @return boolean
-		 * @static 
-		 */
-		 public static function hasMacro($name){
-			//Method inherited from \Illuminate\Html\HtmlBuilder
-			return \Illuminate\Html\HtmlBuilder::hasMacro($name);
-		 }
-
-		/**
-		 * Dynamically handle calls to the class.
-		 *
-		 * @param string  $method
-		 * @param array   $parameters
-		 * @return mixed
-		 * @throws \BadMethodCallException
-		 * @static 
-		 */
-		 public static function __callStatic($method, $parameters){
-			//Method inherited from \Illuminate\Html\HtmlBuilder
-			return \Illuminate\Html\HtmlBuilder::__callStatic($method, $parameters);
-		 }
-
-		/**
-		 * Dynamically handle calls to the form builder.
+		 * Dynamically handle calls to the html class.
 		 *
 		 * @param string  $method
 		 * @param array   $parameters
@@ -8250,19 +8012,6 @@ namespace {
 		 }
 
 		/**
-		 * Register an error_log handler.
-		 *
-		 * @param integer $messageType
-		 * @param string  $level
-		 * @return void
-		 * @static 
-		 */
-		 public static function useErrorLog($level = 'debug', $messageType = 0){
-			//Method inherited from \Illuminate\Log\Writer
-			 \Illuminate\Log\Writer::useErrorLog($level, $messageType);
-		 }
-
-		/**
 		 * Register a new callback handler for when
 		 * a log event is triggered.
 		 *
@@ -8326,7 +8075,7 @@ namespace {
 		 * Dynamically handle error additions.
 		 *
 		 * @param string  $method
-		 * @param mixed   $parameters
+		 * @param array   $parameters
 		 * @return mixed
 		 * @throws \BadMethodCallException
 		 * @static 
@@ -8445,14 +8194,14 @@ namespace {
 		/**
 		 * Create a new Mailer instance.
 		 *
-		 * @param \Illuminate\View\Factory  $views
+		 * @param \Illuminate\View\Environment  $views
 		 * @param \Swift_Mailer  $swift
 		 * @return void
 		 * @static 
 		 */
-		 public static function __construct($views, $swift, $events = null){
+		 public static function __construct($views, $swift){
 			//Method inherited from \Illuminate\Mail\Mailer
-			 \Illuminate\Mail\Mailer::__construct($views, $swift, $events);
+			 \Illuminate\Mail\Mailer::__construct($views, $swift);
 		 }
 
 		/**
@@ -8488,12 +8237,12 @@ namespace {
 		 * @param string|array  $view
 		 * @param array  $data
 		 * @param Closure|string  $callback
-		 * @return void
+		 * @return int
 		 * @static 
 		 */
 		 public static function send($view, $data, $callback){
 			//Method inherited from \Illuminate\Mail\Mailer
-			 \Illuminate\Mail\Mailer::send($view, $data, $callback);
+			return \Illuminate\Mail\Mailer::send($view, $data, $callback);
 		 }
 
 		/**
@@ -8584,25 +8333,14 @@ namespace {
 		 }
 
 		/**
-		 * Check if the mailer is pretending to send messages.
+		 * Get the view environment instance.
 		 *
-		 * @return bool
+		 * @return \Illuminate\View\Environment
 		 * @static 
 		 */
-		 public static function isPretending(){
+		 public static function getViewEnvironment(){
 			//Method inherited from \Illuminate\Mail\Mailer
-			return \Illuminate\Mail\Mailer::isPretending();
-		 }
-
-		/**
-		 * Get the view factory instance.
-		 *
-		 * @return \Illuminate\View\Factory
-		 * @static 
-		 */
-		 public static function getViewFactory(){
-			//Method inherited from \Illuminate\Mail\Mailer
-			return \Illuminate\Mail\Mailer::getViewFactory();
+			return \Illuminate\Mail\Mailer::getViewEnvironment();
 		 }
 
 		/**
@@ -8678,18 +8416,18 @@ namespace {
 	}
 	class Paginator extends \Illuminate\Support\Facades\Paginator{
 		/**
-		 * Create a new pagination factory.
+		 * Create a new pagination environment.
 		 *
 		 * @param \Symfony\Component\HttpFoundation\Request  $request
-		 * @param \Illuminate\View\Factory  $view
+		 * @param \Illuminate\View\Environment  $view
 		 * @param \Symfony\Component\Translation\TranslatorInterface  $trans
 		 * @param string  $pageName
 		 * @return void
 		 * @static 
 		 */
 		 public static function __construct($request, $view, $trans, $pageName = 'page'){
-			//Method inherited from \Illuminate\Pagination\Factory
-			 \Illuminate\Pagination\Factory::__construct($request, $view, $trans, $pageName);
+			//Method inherited from \Illuminate\Pagination\Environment
+			 \Illuminate\Pagination\Environment::__construct($request, $view, $trans, $pageName);
 		 }
 
 		/**
@@ -8697,13 +8435,13 @@ namespace {
 		 *
 		 * @param array  $items
 		 * @param int    $total
-		 * @param int|null  $perPage
+		 * @param int    $perPage
 		 * @return \Illuminate\Pagination\Paginator
 		 * @static 
 		 */
-		 public static function make($items, $total, $perPage = null){
-			//Method inherited from \Illuminate\Pagination\Factory
-			return \Illuminate\Pagination\Factory::make($items, $total, $perPage);
+		 public static function make($items, $total, $perPage){
+			//Method inherited from \Illuminate\Pagination\Environment
+			return \Illuminate\Pagination\Environment::make($items, $total, $perPage);
 		 }
 
 		/**
@@ -8715,8 +8453,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function getPaginationView($paginator, $view = null){
-			//Method inherited from \Illuminate\Pagination\Factory
-			return \Illuminate\Pagination\Factory::getPaginationView($paginator, $view);
+			//Method inherited from \Illuminate\Pagination\Environment
+			return \Illuminate\Pagination\Environment::getPaginationView($paginator, $view);
 		 }
 
 		/**
@@ -8726,8 +8464,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function getCurrentPage(){
-			//Method inherited from \Illuminate\Pagination\Factory
-			return \Illuminate\Pagination\Factory::getCurrentPage();
+			//Method inherited from \Illuminate\Pagination\Environment
+			return \Illuminate\Pagination\Environment::getCurrentPage();
 		 }
 
 		/**
@@ -8738,8 +8476,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function setCurrentPage($number){
-			//Method inherited from \Illuminate\Pagination\Factory
-			 \Illuminate\Pagination\Factory::setCurrentPage($number);
+			//Method inherited from \Illuminate\Pagination\Environment
+			 \Illuminate\Pagination\Environment::setCurrentPage($number);
 		 }
 
 		/**
@@ -8749,8 +8487,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function getCurrentUrl(){
-			//Method inherited from \Illuminate\Pagination\Factory
-			return \Illuminate\Pagination\Factory::getCurrentUrl();
+			//Method inherited from \Illuminate\Pagination\Environment
+			return \Illuminate\Pagination\Environment::getCurrentUrl();
 		 }
 
 		/**
@@ -8761,8 +8499,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function setBaseUrl($baseUrl){
-			//Method inherited from \Illuminate\Pagination\Factory
-			 \Illuminate\Pagination\Factory::setBaseUrl($baseUrl);
+			//Method inherited from \Illuminate\Pagination\Environment
+			 \Illuminate\Pagination\Environment::setBaseUrl($baseUrl);
 		 }
 
 		/**
@@ -8773,8 +8511,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function setPageName($pageName){
-			//Method inherited from \Illuminate\Pagination\Factory
-			 \Illuminate\Pagination\Factory::setPageName($pageName);
+			//Method inherited from \Illuminate\Pagination\Environment
+			 \Illuminate\Pagination\Environment::setPageName($pageName);
 		 }
 
 		/**
@@ -8784,8 +8522,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function getPageName(){
-			//Method inherited from \Illuminate\Pagination\Factory
-			return \Illuminate\Pagination\Factory::getPageName();
+			//Method inherited from \Illuminate\Pagination\Environment
+			return \Illuminate\Pagination\Environment::getPageName();
 		 }
 
 		/**
@@ -8796,8 +8534,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function getViewName($view = null){
-			//Method inherited from \Illuminate\Pagination\Factory
-			return \Illuminate\Pagination\Factory::getViewName($view);
+			//Method inherited from \Illuminate\Pagination\Environment
+			return \Illuminate\Pagination\Environment::getViewName($view);
 		 }
 
 		/**
@@ -8808,8 +8546,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function setViewName($viewName){
-			//Method inherited from \Illuminate\Pagination\Factory
-			 \Illuminate\Pagination\Factory::setViewName($viewName);
+			//Method inherited from \Illuminate\Pagination\Environment
+			 \Illuminate\Pagination\Environment::setViewName($viewName);
 		 }
 
 		/**
@@ -8819,8 +8557,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function getLocale(){
-			//Method inherited from \Illuminate\Pagination\Factory
-			return \Illuminate\Pagination\Factory::getLocale();
+			//Method inherited from \Illuminate\Pagination\Environment
+			return \Illuminate\Pagination\Environment::getLocale();
 		 }
 
 		/**
@@ -8831,8 +8569,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function setLocale($locale){
-			//Method inherited from \Illuminate\Pagination\Factory
-			 \Illuminate\Pagination\Factory::setLocale($locale);
+			//Method inherited from \Illuminate\Pagination\Environment
+			 \Illuminate\Pagination\Environment::setLocale($locale);
 		 }
 
 		/**
@@ -8842,8 +8580,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function getRequest(){
-			//Method inherited from \Illuminate\Pagination\Factory
-			return \Illuminate\Pagination\Factory::getRequest();
+			//Method inherited from \Illuminate\Pagination\Environment
+			return \Illuminate\Pagination\Environment::getRequest();
 		 }
 
 		/**
@@ -8854,31 +8592,31 @@ namespace {
 		 * @static 
 		 */
 		 public static function setRequest($request){
-			//Method inherited from \Illuminate\Pagination\Factory
-			 \Illuminate\Pagination\Factory::setRequest($request);
+			//Method inherited from \Illuminate\Pagination\Environment
+			 \Illuminate\Pagination\Environment::setRequest($request);
 		 }
 
 		/**
-		 * Get the current view factory.
+		 * Get the current view driver.
 		 *
-		 * @return \Illuminate\View\Factory
+		 * @return \Illuminate\View\Environment
 		 * @static 
 		 */
-		 public static function getViewFactory(){
-			//Method inherited from \Illuminate\Pagination\Factory
-			return \Illuminate\Pagination\Factory::getViewFactory();
+		 public static function getViewDriver(){
+			//Method inherited from \Illuminate\Pagination\Environment
+			return \Illuminate\Pagination\Environment::getViewDriver();
 		 }
 
 		/**
-		 * Set the current view factory.
+		 * Set the current view driver.
 		 *
-		 * @param \Illuminate\View\Factory  $view
+		 * @param \Illuminate\View\Environment  $view
 		 * @return void
 		 * @static 
 		 */
-		 public static function setViewFactory($view){
-			//Method inherited from \Illuminate\Pagination\Factory
-			 \Illuminate\Pagination\Factory::setViewFactory($view);
+		 public static function setViewDriver($view){
+			//Method inherited from \Illuminate\Pagination\Environment
+			 \Illuminate\Pagination\Environment::setViewDriver($view);
 		 }
 
 		/**
@@ -8888,8 +8626,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function getTranslator(){
-			//Method inherited from \Illuminate\Pagination\Factory
-			return \Illuminate\Pagination\Factory::getTranslator();
+			//Method inherited from \Illuminate\Pagination\Environment
+			return \Illuminate\Pagination\Environment::getTranslator();
 		 }
 
 	}
@@ -8989,18 +8727,6 @@ namespace {
 		 }
 
 		/**
-		 * Register an event listener for the daemon queue loop.
-		 *
-		 * @param mixed  $callback
-		 * @return void
-		 * @static 
-		 */
-		 public static function looping($callback){
-			//Method inherited from \Illuminate\Queue\QueueManager
-			 \Illuminate\Queue\QueueManager::looping($callback);
-		 }
-
-		/**
 		 * Register an event listener for the failed job event.
 		 *
 		 * @param mixed  $callback
@@ -9010,18 +8736,6 @@ namespace {
 		 public static function failing($callback){
 			//Method inherited from \Illuminate\Queue\QueueManager
 			 \Illuminate\Queue\QueueManager::failing($callback);
-		 }
-
-		/**
-		 * Register an event listener for the daemon queue stopping.
-		 *
-		 * @param mixed  $callback
-		 * @return void
-		 * @static 
-		 */
-		 public static function stopping($callback){
-			//Method inherited from \Illuminate\Queue\QueueManager
-			 \Illuminate\Queue\QueueManager::stopping($callback);
 		 }
 
 		/**
@@ -9223,18 +8937,6 @@ namespace {
 		 public static function setContainer($container){
 			//Method inherited from \Illuminate\Queue\Queue
 			 \Illuminate\Queue\SyncQueue::setContainer($container);
-		 }
-
-		/**
-		 * Set the encrypter instance.
-		 *
-		 * @param \Illuminate\Encryption\Encrypter  $crypt
-		 * @return void
-		 * @static 
-		 */
-		 public static function setEncrypter($crypt){
-			//Method inherited from \Illuminate\Queue\Queue
-			 \Illuminate\Queue\SyncQueue::setEncrypter($crypt);
 		 }
 
 	}
@@ -11392,9 +11094,9 @@ namespace {
 		 * @return bool
 		 * @static 
 		 */
-		 public static function uses(){
+		 public static function isAction(){
 			//Method inherited from \Illuminate\Routing\Router
-			return \Illuminate\Routing\Router::uses();
+			return \Illuminate\Routing\Router::isAction();
 		 }
 
 		/**
@@ -11888,19 +11590,6 @@ namespace {
 		 }
 
 		/**
-		 * Get the value of a given key and then forget it.
-		 *
-		 * @param string  $key
-		 * @param string  $default
-		 * @return mixed
-		 * @static 
-		 */
-		 public static function pull($key, $default = null){
-			//Method inherited from \Illuminate\Session\Store
-			return \Illuminate\Session\Store::pull($key, $default);
-		 }
-
-		/**
 		 * Determine if the session contains old input.
 		 *
 		 * @param string  $key
@@ -12173,18 +11862,6 @@ namespace {
 		 }
 
 		/**
-		 * Set the existence of the session on the handler if applicable.
-		 *
-		 * @param bool  $value
-		 * @return void
-		 * @static 
-		 */
-		 public static function setExists($value){
-			//Method inherited from \Illuminate\Session\Store
-			 \Illuminate\Session\Store::setExists($value);
-		 }
-
-		/**
 		 * Get the underlying session handler implementation.
 		 *
 		 * @return \SessionHandlerInterface
@@ -12431,18 +12108,6 @@ namespace {
 		 }
 
 		/**
-		 * Force the schema for URLs.
-		 *
-		 * @param string  $schema
-		 * @return void
-		 * @static 
-		 */
-		 public static function forceSchema($schema){
-			//Method inherited from \Illuminate\Routing\UrlGenerator
-			 \Illuminate\Routing\UrlGenerator::forceSchema($schema);
-		 }
-
-		/**
 		 * Get the URL to a named route.
 		 *
 		 * @param string  $name
@@ -12470,18 +12135,6 @@ namespace {
 		 public static function action($action, $parameters = array(), $absolute = true){
 			//Method inherited from \Illuminate\Routing\UrlGenerator
 			return \Illuminate\Routing\UrlGenerator::action($action, $parameters, $absolute);
-		 }
-
-		/**
-		 * Set the forced root URL.
-		 *
-		 * @param string  $root
-		 * @return void
-		 * @static 
-		 */
-		 public static function forceRootUrl($root){
-			//Method inherited from \Illuminate\Routing\UrlGenerator
-			 \Illuminate\Routing\UrlGenerator::forceRootUrl($root);
 		 }
 
 		/**
@@ -12639,7 +12292,7 @@ namespace {
 	}
 	class View extends \Illuminate\Support\Facades\View{
 		/**
-		 * Create a new view factory instance.
+		 * Create a new view environment instance.
 		 *
 		 * @param \Illuminate\View\Engines\EngineResolver  $engines
 		 * @param \Illuminate\View\ViewFinderInterface  $finder
@@ -12648,8 +12301,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function __construct($engines, $finder, $events){
-			//Method inherited from \Illuminate\View\Factory
-			 \Illuminate\View\Factory::__construct($engines, $finder, $events);
+			//Method inherited from \Illuminate\View\Environment
+			 \Illuminate\View\Environment::__construct($engines, $finder, $events);
 		 }
 
 		/**
@@ -12662,8 +12315,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function make($view, $data = array(), $mergeData = array()){
-			//Method inherited from \Illuminate\View\Factory
-			return \Illuminate\View\Factory::make($view, $data, $mergeData);
+			//Method inherited from \Illuminate\View\Environment
+			return \Illuminate\View\Environment::make($view, $data, $mergeData);
 		 }
 
 		/**
@@ -12675,8 +12328,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function of($view, $data = array()){
-			//Method inherited from \Illuminate\View\Factory
-			return \Illuminate\View\Factory::of($view, $data);
+			//Method inherited from \Illuminate\View\Environment
+			return \Illuminate\View\Environment::of($view, $data);
 		 }
 
 		/**
@@ -12688,21 +12341,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function name($view, $name){
-			//Method inherited from \Illuminate\View\Factory
-			 \Illuminate\View\Factory::name($view, $name);
-		 }
-
-		/**
-		 * Add an alias for a view.
-		 *
-		 * @param string  $view
-		 * @param string  $alias
-		 * @return void
-		 * @static 
-		 */
-		 public static function alias($view, $alias){
-			//Method inherited from \Illuminate\View\Factory
-			 \Illuminate\View\Factory::alias($view, $alias);
+			//Method inherited from \Illuminate\View\Environment
+			 \Illuminate\View\Environment::name($view, $name);
 		 }
 
 		/**
@@ -12713,8 +12353,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function exists($view){
-			//Method inherited from \Illuminate\View\Factory
-			return \Illuminate\View\Factory::exists($view);
+			//Method inherited from \Illuminate\View\Environment
+			return \Illuminate\View\Environment::exists($view);
 		 }
 
 		/**
@@ -12728,20 +12368,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function renderEach($view, $data, $iterator, $empty = 'raw|'){
-			//Method inherited from \Illuminate\View\Factory
-			return \Illuminate\View\Factory::renderEach($view, $data, $iterator, $empty);
-		 }
-
-		/**
-		 * Get the appropriate view engine for the given path.
-		 *
-		 * @param string  $path
-		 * @return \Illuminate\View\Engines\EngineInterface
-		 * @static 
-		 */
-		 public static function getEngineFromPath($path){
-			//Method inherited from \Illuminate\View\Factory
-			return \Illuminate\View\Factory::getEngineFromPath($path);
+			//Method inherited from \Illuminate\View\Environment
+			return \Illuminate\View\Environment::renderEach($view, $data, $iterator, $empty);
 		 }
 
 		/**
@@ -12753,8 +12381,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function share($key, $value = null){
-			//Method inherited from \Illuminate\View\Factory
-			 \Illuminate\View\Factory::share($key, $value);
+			//Method inherited from \Illuminate\View\Environment
+			 \Illuminate\View\Environment::share($key, $value);
 		 }
 
 		/**
@@ -12766,8 +12394,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function creator($views, $callback){
-			//Method inherited from \Illuminate\View\Factory
-			return \Illuminate\View\Factory::creator($views, $callback);
+			//Method inherited from \Illuminate\View\Environment
+			return \Illuminate\View\Environment::creator($views, $callback);
 		 }
 
 		/**
@@ -12778,8 +12406,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function composers($composers){
-			//Method inherited from \Illuminate\View\Factory
-			return \Illuminate\View\Factory::composers($composers);
+			//Method inherited from \Illuminate\View\Environment
+			return \Illuminate\View\Environment::composers($composers);
 		 }
 
 		/**
@@ -12791,8 +12419,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function composer($views, $callback, $priority = null){
-			//Method inherited from \Illuminate\View\Factory
-			return \Illuminate\View\Factory::composer($views, $callback, $priority);
+			//Method inherited from \Illuminate\View\Environment
+			return \Illuminate\View\Environment::composer($views, $callback, $priority);
 		 }
 
 		/**
@@ -12803,8 +12431,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function callComposer($view){
-			//Method inherited from \Illuminate\View\Factory
-			 \Illuminate\View\Factory::callComposer($view);
+			//Method inherited from \Illuminate\View\Environment
+			 \Illuminate\View\Environment::callComposer($view);
 		 }
 
 		/**
@@ -12815,8 +12443,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function callCreator($view){
-			//Method inherited from \Illuminate\View\Factory
-			 \Illuminate\View\Factory::callCreator($view);
+			//Method inherited from \Illuminate\View\Environment
+			 \Illuminate\View\Environment::callCreator($view);
 		 }
 
 		/**
@@ -12828,8 +12456,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function startSection($section, $content = ''){
-			//Method inherited from \Illuminate\View\Factory
-			 \Illuminate\View\Factory::startSection($section, $content);
+			//Method inherited from \Illuminate\View\Environment
+			 \Illuminate\View\Environment::startSection($section, $content);
 		 }
 
 		/**
@@ -12841,8 +12469,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function inject($section, $content){
-			//Method inherited from \Illuminate\View\Factory
-			 \Illuminate\View\Factory::inject($section, $content);
+			//Method inherited from \Illuminate\View\Environment
+			 \Illuminate\View\Environment::inject($section, $content);
 		 }
 
 		/**
@@ -12852,8 +12480,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function yieldSection(){
-			//Method inherited from \Illuminate\View\Factory
-			return \Illuminate\View\Factory::yieldSection();
+			//Method inherited from \Illuminate\View\Environment
+			return \Illuminate\View\Environment::yieldSection();
 		 }
 
 		/**
@@ -12864,8 +12492,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function stopSection($overwrite = false){
-			//Method inherited from \Illuminate\View\Factory
-			return \Illuminate\View\Factory::stopSection($overwrite);
+			//Method inherited from \Illuminate\View\Environment
+			return \Illuminate\View\Environment::stopSection($overwrite);
 		 }
 
 		/**
@@ -12875,8 +12503,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function appendSection(){
-			//Method inherited from \Illuminate\View\Factory
-			return \Illuminate\View\Factory::appendSection();
+			//Method inherited from \Illuminate\View\Environment
+			return \Illuminate\View\Environment::appendSection();
 		 }
 
 		/**
@@ -12888,8 +12516,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function yieldContent($section, $default = ''){
-			//Method inherited from \Illuminate\View\Factory
-			return \Illuminate\View\Factory::yieldContent($section, $default);
+			//Method inherited from \Illuminate\View\Environment
+			return \Illuminate\View\Environment::yieldContent($section, $default);
 		 }
 
 		/**
@@ -12899,8 +12527,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function flushSections(){
-			//Method inherited from \Illuminate\View\Factory
-			 \Illuminate\View\Factory::flushSections();
+			//Method inherited from \Illuminate\View\Environment
+			 \Illuminate\View\Environment::flushSections();
 		 }
 
 		/**
@@ -12910,8 +12538,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function flushSectionsIfDoneRendering(){
-			//Method inherited from \Illuminate\View\Factory
-			 \Illuminate\View\Factory::flushSectionsIfDoneRendering();
+			//Method inherited from \Illuminate\View\Environment
+			 \Illuminate\View\Environment::flushSectionsIfDoneRendering();
 		 }
 
 		/**
@@ -12921,8 +12549,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function incrementRender(){
-			//Method inherited from \Illuminate\View\Factory
-			 \Illuminate\View\Factory::incrementRender();
+			//Method inherited from \Illuminate\View\Environment
+			 \Illuminate\View\Environment::incrementRender();
 		 }
 
 		/**
@@ -12932,8 +12560,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function decrementRender(){
-			//Method inherited from \Illuminate\View\Factory
-			 \Illuminate\View\Factory::decrementRender();
+			//Method inherited from \Illuminate\View\Environment
+			 \Illuminate\View\Environment::decrementRender();
 		 }
 
 		/**
@@ -12943,8 +12571,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function doneRendering(){
-			//Method inherited from \Illuminate\View\Factory
-			return \Illuminate\View\Factory::doneRendering();
+			//Method inherited from \Illuminate\View\Environment
+			return \Illuminate\View\Environment::doneRendering();
 		 }
 
 		/**
@@ -12955,8 +12583,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function addLocation($location){
-			//Method inherited from \Illuminate\View\Factory
-			 \Illuminate\View\Factory::addLocation($location);
+			//Method inherited from \Illuminate\View\Environment
+			 \Illuminate\View\Environment::addLocation($location);
 		 }
 
 		/**
@@ -12968,8 +12596,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function addNamespace($namespace, $hints){
-			//Method inherited from \Illuminate\View\Factory
-			 \Illuminate\View\Factory::addNamespace($namespace, $hints);
+			//Method inherited from \Illuminate\View\Environment
+			 \Illuminate\View\Environment::addNamespace($namespace, $hints);
 		 }
 
 		/**
@@ -12981,8 +12609,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function prependNamespace($namespace, $hints){
-			//Method inherited from \Illuminate\View\Factory
-			 \Illuminate\View\Factory::prependNamespace($namespace, $hints);
+			//Method inherited from \Illuminate\View\Environment
+			 \Illuminate\View\Environment::prependNamespace($namespace, $hints);
 		 }
 
 		/**
@@ -12995,8 +12623,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function addExtension($extension, $engine, $resolver = null){
-			//Method inherited from \Illuminate\View\Factory
-			 \Illuminate\View\Factory::addExtension($extension, $engine, $resolver);
+			//Method inherited from \Illuminate\View\Environment
+			 \Illuminate\View\Environment::addExtension($extension, $engine, $resolver);
 		 }
 
 		/**
@@ -13006,8 +12634,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function getExtensions(){
-			//Method inherited from \Illuminate\View\Factory
-			return \Illuminate\View\Factory::getExtensions();
+			//Method inherited from \Illuminate\View\Environment
+			return \Illuminate\View\Environment::getExtensions();
 		 }
 
 		/**
@@ -13017,8 +12645,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function getEngineResolver(){
-			//Method inherited from \Illuminate\View\Factory
-			return \Illuminate\View\Factory::getEngineResolver();
+			//Method inherited from \Illuminate\View\Environment
+			return \Illuminate\View\Environment::getEngineResolver();
 		 }
 
 		/**
@@ -13028,8 +12656,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function getFinder(){
-			//Method inherited from \Illuminate\View\Factory
-			return \Illuminate\View\Factory::getFinder();
+			//Method inherited from \Illuminate\View\Environment
+			return \Illuminate\View\Environment::getFinder();
 		 }
 
 		/**
@@ -13039,8 +12667,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function setFinder($finder){
-			//Method inherited from \Illuminate\View\Factory
-			 \Illuminate\View\Factory::setFinder($finder);
+			//Method inherited from \Illuminate\View\Environment
+			 \Illuminate\View\Environment::setFinder($finder);
 		 }
 
 		/**
@@ -13050,8 +12678,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function getDispatcher(){
-			//Method inherited from \Illuminate\View\Factory
-			return \Illuminate\View\Factory::getDispatcher();
+			//Method inherited from \Illuminate\View\Environment
+			return \Illuminate\View\Environment::getDispatcher();
 		 }
 
 		/**
@@ -13062,8 +12690,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function setDispatcher($events){
-			//Method inherited from \Illuminate\View\Factory
-			 \Illuminate\View\Factory::setDispatcher($events);
+			//Method inherited from \Illuminate\View\Environment
+			 \Illuminate\View\Environment::setDispatcher($events);
 		 }
 
 		/**
@@ -13073,8 +12701,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function getContainer(){
-			//Method inherited from \Illuminate\View\Factory
-			return \Illuminate\View\Factory::getContainer();
+			//Method inherited from \Illuminate\View\Environment
+			return \Illuminate\View\Environment::getContainer();
 		 }
 
 		/**
@@ -13085,8 +12713,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function setContainer($container){
-			//Method inherited from \Illuminate\View\Factory
-			 \Illuminate\View\Factory::setContainer($container);
+			//Method inherited from \Illuminate\View\Environment
+			 \Illuminate\View\Environment::setContainer($container);
 		 }
 
 		/**
@@ -13098,8 +12726,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function shared($key, $default = null){
-			//Method inherited from \Illuminate\View\Factory
-			return \Illuminate\View\Factory::shared($key, $default);
+			//Method inherited from \Illuminate\View\Environment
+			return \Illuminate\View\Environment::shared($key, $default);
 		 }
 
 		/**
@@ -13109,8 +12737,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function getShared(){
-			//Method inherited from \Illuminate\View\Factory
-			return \Illuminate\View\Factory::getShared();
+			//Method inherited from \Illuminate\View\Environment
+			return \Illuminate\View\Environment::getShared();
 		 }
 
 		/**
@@ -13120,8 +12748,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function getSections(){
-			//Method inherited from \Illuminate\View\Factory
-			return \Illuminate\View\Factory::getSections();
+			//Method inherited from \Illuminate\View\Environment
+			return \Illuminate\View\Environment::getSections();
 		 }
 
 		/**
@@ -13131,1623 +12759,12 @@ namespace {
 		 * @static 
 		 */
 		 public static function getNames(){
-			//Method inherited from \Illuminate\View\Factory
-			return \Illuminate\View\Factory::getNames();
+			//Method inherited from \Illuminate\View\Environment
+			return \Illuminate\View\Environment::getNames();
 		 }
 
 	}
-	class Debugbar extends \Barryvdh\Debugbar\Facade{
-		/**
-		 * 
-		 *
-		 * @param \Illuminate\Foundation\Application $app
-		 * @static 
-		 */
-		 public static function __construct($app = null){
-			//Method inherited from \Barryvdh\Debugbar\LaravelDebugbar
-			 \Barryvdh\Debugbar\LaravelDebugbar::__construct($app);
-		 }
-
-		/**
-		 * Check if the Debugbar is enabled
-		 *
-		 * @return boolean
-		 * @static 
-		 */
-		 public static function isEnabled(){
-			//Method inherited from \Barryvdh\Debugbar\LaravelDebugbar
-			return \Barryvdh\Debugbar\LaravelDebugbar::isEnabled();
-		 }
-
-		/**
-		 * Enable the Debugbar and boot, if not already booted.
-		 *
-		 * @static 
-		 */
-		 public static function enable(){
-			//Method inherited from \Barryvdh\Debugbar\LaravelDebugbar
-			 \Barryvdh\Debugbar\LaravelDebugbar::enable();
-		 }
-
-		/**
-		 * Disable the Debugbar
-		 *
-		 * @static 
-		 */
-		 public static function disable(){
-			//Method inherited from \Barryvdh\Debugbar\LaravelDebugbar
-			 \Barryvdh\Debugbar\LaravelDebugbar::disable();
-		 }
-
-		/**
-		 * Boot the debugbar (add collectors, renderer and listener)
-		 *
-		 * @static 
-		 */
-		 public static function boot(){
-			//Method inherited from \Barryvdh\Debugbar\LaravelDebugbar
-			 \Barryvdh\Debugbar\LaravelDebugbar::boot();
-		 }
-
-		/**
-		 * Modify the response and inject the debugbar (or data in headers)
-		 *
-		 * @param \Illuminate\Http\Request  $request
-		 * @param \Symfony\Component\HttpFoundation\Response  $response
-		 * @return \Symfony\Component\HttpFoundation\Response
-		 * @static 
-		 */
-		 public static function modifyResponse($request, $response){
-			//Method inherited from \Barryvdh\Debugbar\LaravelDebugbar
-			return \Barryvdh\Debugbar\LaravelDebugbar::modifyResponse($request, $response);
-		 }
-
-		/**
-		 * 
-		 *
-		 * @static 
-		 */
-		 public static function shouldCollect($name, $default = false){
-			//Method inherited from \Barryvdh\Debugbar\LaravelDebugbar
-			 \Barryvdh\Debugbar\LaravelDebugbar::shouldCollect($name, $default);
-		 }
-
-		/**
-		 * Starts a measure
-		 *
-		 * @param string $name Internal name, used to stop the measure
-		 * @param string $label Public name
-		 * @static 
-		 */
-		 public static function startMeasure($name, $label = null){
-			//Method inherited from \Barryvdh\Debugbar\LaravelDebugbar
-			 \Barryvdh\Debugbar\LaravelDebugbar::startMeasure($name, $label);
-		 }
-
-		/**
-		 * Stops a measure
-		 *
-		 * @param string $name
-		 * @static 
-		 */
-		 public static function stopMeasure($name){
-			//Method inherited from \Barryvdh\Debugbar\LaravelDebugbar
-			 \Barryvdh\Debugbar\LaravelDebugbar::stopMeasure($name);
-		 }
-
-		/**
-		 * Adds a measure
-		 *
-		 * @param string $label
-		 * @param float $start
-		 * @param float $end
-		 * @static 
-		 */
-		 public static function addMeasure($label, $start, $end){
-			//Method inherited from \Barryvdh\Debugbar\LaravelDebugbar
-			 \Barryvdh\Debugbar\LaravelDebugbar::addMeasure($label, $start, $end);
-		 }
-
-		/**
-		 * Utility function to measure the execution of a Closure
-		 *
-		 * @param string $label
-		 * @param \Closure|callable $closure
-		 * @static 
-		 */
-		 public static function measure($label, $closure){
-			//Method inherited from \Barryvdh\Debugbar\LaravelDebugbar
-			 \Barryvdh\Debugbar\LaravelDebugbar::measure($label, $closure);
-		 }
-
-		/**
-		 * Adds an exception to be profiled in the debug bar
-		 *
-		 * @param Exception $e
-		 * @static 
-		 */
-		 public static function addException($e){
-			//Method inherited from \Barryvdh\Debugbar\LaravelDebugbar
-			 \Barryvdh\Debugbar\LaravelDebugbar::addException($e);
-		 }
-
-		/**
-		 * Adds a message to the MessagesCollector
-		 * 
-		 * A message can be anything from an object to a string
-		 *
-		 * @param mixed $message
-		 * @param string $label
-		 * @static 
-		 */
-		 public static function addMessage($message, $label = 'info'){
-			//Method inherited from \Barryvdh\Debugbar\LaravelDebugbar
-			 \Barryvdh\Debugbar\LaravelDebugbar::addMessage($message, $label);
-		 }
-
-		/**
-		 * Injects the web debug toolbar into the given Response.
-		 *
-		 * @param \Symfony\Component\HttpFoundation\Response $response A Response instance
-		 * Based on https://github.com/symfony/WebProfilerBundle/blob/master/EventListener/WebDebugToolbarListener.php
-		 * @static 
-		 */
-		 public static function injectDebugbar($response){
-			//Method inherited from \Barryvdh\Debugbar\LaravelDebugbar
-			 \Barryvdh\Debugbar\LaravelDebugbar::injectDebugbar($response);
-		 }
-
-		/**
-		 * Collect data in a CLI request
-		 *
-		 * @return array
-		 * @static 
-		 */
-		 public static function collectConsole(){
-			//Method inherited from \Barryvdh\Debugbar\LaravelDebugbar
-			return \Barryvdh\Debugbar\LaravelDebugbar::collectConsole();
-		 }
-
-		/**
-		 * Collects the data from the collectors
-		 *
-		 * @return array
-		 * @static 
-		 */
-		 public static function collect(){
-			//Method inherited from \Barryvdh\Debugbar\LaravelDebugbar
-			return \Barryvdh\Debugbar\LaravelDebugbar::collect();
-		 }
-
-		/**
-		 * Magic calls for adding messages
-		 *
-		 * @param string $method
-		 * @param array $args
-		 * @return mixed|void
-		 * @static 
-		 */
-		 public static function __call($method, $args){
-			//Method inherited from \Barryvdh\Debugbar\LaravelDebugbar
-			return \Barryvdh\Debugbar\LaravelDebugbar::__call($method, $args);
-		 }
-
-		/**
-		 * Adds a data collector
-		 *
-		 * @param DataCollectorInterface $collector
-		 * @throws DebugBarException
-		 * @return $this
-		 * @static 
-		 */
-		 public static function addCollector($collector){
-			//Method inherited from \DebugBar\DebugBar
-			return \Barryvdh\Debugbar\LaravelDebugbar::addCollector($collector);
-		 }
-
-		/**
-		 * Checks if a data collector has been added
-		 *
-		 * @param string $name
-		 * @return boolean
-		 * @static 
-		 */
-		 public static function hasCollector($name){
-			//Method inherited from \DebugBar\DebugBar
-			return \Barryvdh\Debugbar\LaravelDebugbar::hasCollector($name);
-		 }
-
-		/**
-		 * Returns a data collector
-		 *
-		 * @param string $name
-		 * @return DataCollectorInterface
-		 * @static 
-		 */
-		 public static function getCollector($name){
-			//Method inherited from \DebugBar\DebugBar
-			return \Barryvdh\Debugbar\LaravelDebugbar::getCollector($name);
-		 }
-
-		/**
-		 * Returns an array of all data collectors
-		 *
-		 * @return array[DataCollectorInterface]
-		 * @static 
-		 */
-		 public static function getCollectors(){
-			//Method inherited from \DebugBar\DebugBar
-			return \Barryvdh\Debugbar\LaravelDebugbar::getCollectors();
-		 }
-
-		/**
-		 * Sets the request id generator
-		 *
-		 * @param RequestIdGeneratorInterface $generator
-		 * @static 
-		 */
-		 public static function setRequestIdGenerator($generator){
-			//Method inherited from \DebugBar\DebugBar
-			 \Barryvdh\Debugbar\LaravelDebugbar::setRequestIdGenerator($generator);
-		 }
-
-		/**
-		 * 
-		 *
-		 * @return RequestIdGeneratorInterface
-		 * @static 
-		 */
-		 public static function getRequestIdGenerator(){
-			//Method inherited from \DebugBar\DebugBar
-			return \Barryvdh\Debugbar\LaravelDebugbar::getRequestIdGenerator();
-		 }
-
-		/**
-		 * Returns the id of the current request
-		 *
-		 * @return string
-		 * @static 
-		 */
-		 public static function getCurrentRequestId(){
-			//Method inherited from \DebugBar\DebugBar
-			return \Barryvdh\Debugbar\LaravelDebugbar::getCurrentRequestId();
-		 }
-
-		/**
-		 * Sets the storage backend to use to store the collected data
-		 *
-		 * @param StorageInterface $storage
-		 * @static 
-		 */
-		 public static function setStorage($storage = null){
-			//Method inherited from \DebugBar\DebugBar
-			 \Barryvdh\Debugbar\LaravelDebugbar::setStorage($storage);
-		 }
-
-		/**
-		 * 
-		 *
-		 * @return StorageInterface
-		 * @static 
-		 */
-		 public static function getStorage(){
-			//Method inherited from \DebugBar\DebugBar
-			return \Barryvdh\Debugbar\LaravelDebugbar::getStorage();
-		 }
-
-		/**
-		 * Checks if the data will be persisted
-		 *
-		 * @return boolean
-		 * @static 
-		 */
-		 public static function isDataPersisted(){
-			//Method inherited from \DebugBar\DebugBar
-			return \Barryvdh\Debugbar\LaravelDebugbar::isDataPersisted();
-		 }
-
-		/**
-		 * Sets the HTTP driver
-		 *
-		 * @param HttpDriverInterface $driver
-		 * @static 
-		 */
-		 public static function setHttpDriver($driver){
-			//Method inherited from \DebugBar\DebugBar
-			 \Barryvdh\Debugbar\LaravelDebugbar::setHttpDriver($driver);
-		 }
-
-		/**
-		 * Returns the HTTP driver
-		 * 
-		 * If no http driver where defined, a PhpHttpDriver is automatically created
-		 *
-		 * @return HttpDriverInterface
-		 * @static 
-		 */
-		 public static function getHttpDriver(){
-			//Method inherited from \DebugBar\DebugBar
-			return \Barryvdh\Debugbar\LaravelDebugbar::getHttpDriver();
-		 }
-
-		/**
-		 * Returns collected data
-		 * 
-		 * Will collect the data if none have been collected yet
-		 *
-		 * @return array
-		 * @static 
-		 */
-		 public static function getData(){
-			//Method inherited from \DebugBar\DebugBar
-			return \Barryvdh\Debugbar\LaravelDebugbar::getData();
-		 }
-
-		/**
-		 * Returns an array of HTTP headers containing the data
-		 *
-		 * @param string $headerName
-		 * @param integer $maxHeaderLength
-		 * @return array
-		 * @static 
-		 */
-		 public static function getDataAsHeaders($headerName = 'phpdebugbar', $maxHeaderLength = 4096, $maxTotalHeaderLength = 250000){
-			//Method inherited from \DebugBar\DebugBar
-			return \Barryvdh\Debugbar\LaravelDebugbar::getDataAsHeaders($headerName, $maxHeaderLength, $maxTotalHeaderLength);
-		 }
-
-		/**
-		 * Sends the data through the HTTP headers
-		 *
-		 * @param bool $useOpenHandler
-		 * @param string $headerName
-		 * @param integer $maxHeaderLength
-		 * @static 
-		 */
-		 public static function sendDataInHeaders($useOpenHandler = null, $headerName = 'phpdebugbar', $maxHeaderLength = 4096){
-			//Method inherited from \DebugBar\DebugBar
-			 \Barryvdh\Debugbar\LaravelDebugbar::sendDataInHeaders($useOpenHandler, $headerName, $maxHeaderLength);
-		 }
-
-		/**
-		 * Stacks the data in the session for later rendering
-		 *
-		 * @static 
-		 */
-		 public static function stackData(){
-			//Method inherited from \DebugBar\DebugBar
-			 \Barryvdh\Debugbar\LaravelDebugbar::stackData();
-		 }
-
-		/**
-		 * Checks if there is stacked data in the session
-		 *
-		 * @return boolean
-		 * @static 
-		 */
-		 public static function hasStackedData(){
-			//Method inherited from \DebugBar\DebugBar
-			return \Barryvdh\Debugbar\LaravelDebugbar::hasStackedData();
-		 }
-
-		/**
-		 * Returns the data stacked in the session
-		 *
-		 * @param boolean $delete Whether to delete the data in the session
-		 * @return array
-		 * @static 
-		 */
-		 public static function getStackedData($delete = true){
-			//Method inherited from \DebugBar\DebugBar
-			return \Barryvdh\Debugbar\LaravelDebugbar::getStackedData($delete);
-		 }
-
-		/**
-		 * Sets the key to use in the $_SESSION array
-		 *
-		 * @param string $ns
-		 * @static 
-		 */
-		 public static function setStackDataSessionNamespace($ns){
-			//Method inherited from \DebugBar\DebugBar
-			 \Barryvdh\Debugbar\LaravelDebugbar::setStackDataSessionNamespace($ns);
-		 }
-
-		/**
-		 * Returns the key used in the $_SESSION array
-		 *
-		 * @return string
-		 * @static 
-		 */
-		 public static function getStackDataSessionNamespace(){
-			//Method inherited from \DebugBar\DebugBar
-			return \Barryvdh\Debugbar\LaravelDebugbar::getStackDataSessionNamespace();
-		 }
-
-		/**
-		 * Sets whether to only use the session to store stacked data even
-		 * if a storage is enabled
-		 *
-		 * @param boolean $enabled
-		 * @static 
-		 */
-		 public static function setStackAlwaysUseSessionStorage($enabled = true){
-			//Method inherited from \DebugBar\DebugBar
-			 \Barryvdh\Debugbar\LaravelDebugbar::setStackAlwaysUseSessionStorage($enabled);
-		 }
-
-		/**
-		 * Checks if the session is always used to store stacked data
-		 * even if a storage is enabled
-		 *
-		 * @return boolean
-		 * @static 
-		 */
-		 public static function isStackAlwaysUseSessionStorage(){
-			//Method inherited from \DebugBar\DebugBar
-			return \Barryvdh\Debugbar\LaravelDebugbar::isStackAlwaysUseSessionStorage();
-		 }
-
-		/**
-		 * Returns a JavascriptRenderer for this instance
-		 *
-		 * @param string $baseUrl
-		 * @param string $basePathng
-		 * @return JavascriptRenderer
-		 * @static 
-		 */
-		 public static function getJavascriptRenderer($baseUrl = null, $basePath = null){
-			//Method inherited from \DebugBar\DebugBar
-			return \Barryvdh\Debugbar\LaravelDebugbar::getJavascriptRenderer($baseUrl, $basePath);
-		 }
-
-		/**
-		 * 
-		 *
-		 * @static 
-		 */
-		 public static function offsetSet($key, $value){
-			//Method inherited from \DebugBar\DebugBar
-			 \Barryvdh\Debugbar\LaravelDebugbar::offsetSet($key, $value);
-		 }
-
-		/**
-		 * 
-		 *
-		 * @static 
-		 */
-		 public static function offsetGet($key){
-			//Method inherited from \DebugBar\DebugBar
-			 \Barryvdh\Debugbar\LaravelDebugbar::offsetGet($key);
-		 }
-
-		/**
-		 * 
-		 *
-		 * @static 
-		 */
-		 public static function offsetExists($key){
-			//Method inherited from \DebugBar\DebugBar
-			 \Barryvdh\Debugbar\LaravelDebugbar::offsetExists($key);
-		 }
-
-		/**
-		 * 
-		 *
-		 * @static 
-		 */
-		 public static function offsetUnset($key){
-			//Method inherited from \DebugBar\DebugBar
-			 \Barryvdh\Debugbar\LaravelDebugbar::offsetUnset($key);
-		 }
-
+	class Datatables extends \Bllim\Datatables\Datatables{
 	}
-
-
-use Illuminate\Support\Str;
-
-if ( ! function_exists('action'))
-{
-	/**
-	 * Generate a URL to a controller action.
-	 *
-	 * @param  string  $name
-	 * @param  array   $parameters
-	 * @return string
-	 */
-	function action($name, $parameters = array())
-	{
-		return app('url')->action($name, $parameters);
-	}
-}
-
-if ( ! function_exists('app'))
-{
-	/**
-	 * Get the root Facade application instance.
-	 *
-	 * @param  string  $make
-	 * @return mixed
-	 */
-	function app($make = null)
-	{
-		if ( ! is_null($make))
-		{
-			return app()->make($make);
-		}
-
-		return Illuminate\Support\Facades\Facade::getFacadeApplication();
-	}
-}
-
-if ( ! function_exists('app_path'))
-{
-	/**
-	 * Get the path to the application folder.
-	 *
-	 * @param   string  $path
-	 * @return  string
-	 */
-	function app_path($path = '')
-	{
-		return app('path').($path ? '/'.$path : $path);
-	}
-}
-
-if ( ! function_exists('append_config'))
-{
-	/**
-	 * Assign high numeric IDs to a config item to force appending.
-	 *
-	 * @param  array  $array
-	 * @return array
-	 */
-	function append_config(array $array)
-	{
-		$start = 9999;
-
-		foreach ($array as $key => $value)
-		{
-			if (is_numeric($key))
-			{
-				$start++;
-
-				$array[$start] = array_pull($array, $key);
-			}
-		}
-
-		return $array;
-	}
-}
-
-if ( ! function_exists('array_add'))
-{
-	/**
-	 * Add an element to an array using "dot" notation if it doesn't exist.
-	 *
-	 * @param  array   $array
-	 * @param  string  $key
-	 * @param  mixed   $value
-	 * @return array
-	 */
-	function array_add($array, $key, $value)
-	{
-		if (is_null(array_get($array, $key)))
-		{
-			array_set($array, $key, $value);
-		}
-
-		return $array;
-	}
-}
-
-if ( ! function_exists('array_build'))
-{
-	/**
-	 * Build a new array using a callback.
-	 *
-	 * @param  array  $array
-	 * @param  \Closure  $callback
-	 * @return array
-	 */
-	function array_build($array, Closure $callback)
-	{
-		$results = array();
-
-		foreach ($array as $key => $value)
-		{
-			list($innerKey, $innerValue) = call_user_func($callback, $key, $value);
-
-			$results[$innerKey] = $innerValue;
-		}
-
-		return $results;
-	}
-}
-
-if ( ! function_exists('array_divide'))
-{
-	/**
-	 * Divide an array into two arrays. One with keys and the other with values.
-	 *
-	 * @param  array  $array
-	 * @return array
-	 */
-	function array_divide($array)
-	{
-		return array(array_keys($array), array_values($array));
-	}
-}
-
-if ( ! function_exists('array_dot'))
-{
-	/**
-	 * Flatten a multi-dimensional associative array with dots.
-	 *
-	 * @param  array   $array
-	 * @param  string  $prepend
-	 * @return array
-	 */
-	function array_dot($array, $prepend = '')
-	{
-		$results = array();
-
-		foreach ($array as $key => $value)
-		{
-			if (is_array($value))
-			{
-				$results = array_merge($results, array_dot($value, $prepend.$key.'.'));
-			}
-			else
-			{
-				$results[$prepend.$key] = $value;
-			}
-		}
-
-		return $results;
-	}
-}
-
-if ( ! function_exists('array_except'))
-{
-	/**
-	 * Get all of the given array except for a specified array of items.
-	 *
-	 * @param  array  $array
-	 * @param  array  $keys
-	 * @return array
-	 */
-	function array_except($array, $keys)
-	{
-		return array_diff_key($array, array_flip((array) $keys));
-	}
-}
-
-if ( ! function_exists('array_fetch'))
-{
-	/**
-	 * Fetch a flattened array of a nested array element.
-	 *
-	 * @param  array   $array
-	 * @param  string  $key
-	 * @return array
-	 */
-	function array_fetch($array, $key)
-	{
-		foreach (explode('.', $key) as $segment)
-		{
-			$results = array();
-
-			foreach ($array as $value)
-			{
-				$value = (array) $value;
-
-				$results[] = $value[$segment];
-			}
-
-			$array = array_values($results);
-		}
-
-		return array_values($results);
-	}
-}
-
-if ( ! function_exists('array_first'))
-{
-	/**
-	 * Return the first element in an array passing a given truth test.
-	 *
-	 * @param  array    $array
-	 * @param  Closure  $callback
-	 * @param  mixed    $default
-	 * @return mixed
-	 */
-	function array_first($array, $callback, $default = null)
-	{
-		foreach ($array as $key => $value)
-		{
-			if (call_user_func($callback, $key, $value)) return $value;
-		}
-
-		return value($default);
-	}
-}
-
-if ( ! function_exists('array_last'))
-{
-	/**
-	 * Return the last element in an array passing a given truth test.
-	 *
-	 * @param  array    $array
-	 * @param  Closure  $callback
-	 * @param  mixed    $default
-	 * @return mixed
-	 */
-	function array_last($array, $callback, $default = null)
-	{
-		return array_first(array_reverse($array), $callback, $default);
-	}
-}
-
-if ( ! function_exists('array_flatten'))
-{
-	/**
-	 * Flatten a multi-dimensional array into a single level.
-	 *
-	 * @param  array  $array
-	 * @return array
-	 */
-	function array_flatten($array)
-	{
-		$return = array();
-
-		array_walk_recursive($array, function($x) use (&$return) { $return[] = $x; });
-
-		return $return;
-	}
-}
-
-if ( ! function_exists('array_forget'))
-{
-	/**
-	 * Remove an array item from a given array using "dot" notation.
-	 *
-	 * @param  array   $array
-	 * @param  string  $key
-	 * @return void
-	 */
-	function array_forget(&$array, $key)
-	{
-		$keys = explode('.', $key);
-
-		while (count($keys) > 1)
-		{
-			$key = array_shift($keys);
-
-			if ( ! isset($array[$key]) || ! is_array($array[$key]))
-			{
-				return;
-			}
-
-			$array =& $array[$key];
-		}
-
-		unset($array[array_shift($keys)]);
-	}
-}
-
-if ( ! function_exists('array_get'))
-{
-	/**
-	 * Get an item from an array using "dot" notation.
-	 *
-	 * @param  array   $array
-	 * @param  string  $key
-	 * @param  mixed   $default
-	 * @return mixed
-	 */
-	function array_get($array, $key, $default = null)
-	{
-		if (is_null($key)) return $array;
-
-		if (isset($array[$key])) return $array[$key];
-
-		foreach (explode('.', $key) as $segment)
-		{
-			if ( ! is_array($array) || ! array_key_exists($segment, $array))
-			{
-				return value($default);
-			}
-
-			$array = $array[$segment];
-		}
-
-		return $array;
-	}
-}
-
-if ( ! function_exists('array_only'))
-{
-	/**
-	 * Get a subset of the items from the given array.
-	 *
-	 * @param  array  $array
-	 * @param  array  $keys
-	 * @return array
-	 */
-	function array_only($array, $keys)
-	{
-		return array_intersect_key($array, array_flip((array) $keys));
-	}
-}
-
-if ( ! function_exists('array_pluck'))
-{
-	/**
-	 * Pluck an array of values from an array.
-	 *
-	 * @param  array   $array
-	 * @param  string  $value
-	 * @param  string  $key
-	 * @return array
-	 */
-	function array_pluck($array, $value, $key = null)
-	{
-		$results = array();
-
-		foreach ($array as $item)
-		{
-			$itemValue = is_object($item) ? $item->{$value} : $item[$value];
-
-			// If the key is "null", we will just append the value to the array and keep
-			// looping. Otherwise we will key the array using the value of the key we
-			// received from the developer. Then we'll return the final array form.
-			if (is_null($key))
-			{
-				$results[] = $itemValue;
-			}
-			else
-			{
-				$itemKey = is_object($item) ? $item->{$key} : $item[$key];
-
-				$results[$itemKey] = $itemValue;
-			}
-		}
-
-		return $results;
-	}
-}
-
-if ( ! function_exists('array_pull'))
-{
-	/**
-	 * Get a value from the array, and remove it.
-	 *
-	 * @param  array   $array
-	 * @param  string  $key
-	 * @param  mixed   $default
-	 * @return mixed
-	 */
-	function array_pull(&$array, $key, $default = null)
-	{
-		$value = array_get($array, $key, $default);
-
-		array_forget($array, $key);
-
-		return $value;
-	}
-}
-
-if ( ! function_exists('array_set'))
-{
-	/**
-	 * Set an array item to a given value using "dot" notation.
-	 *
-	 * If no key is given to the method, the entire array will be replaced.
-	 *
-	 * @param  array   $array
-	 * @param  string  $key
-	 * @param  mixed   $value
-	 * @return array
-	 */
-	function array_set(&$array, $key, $value)
-	{
-		if (is_null($key)) return $array = $value;
-
-		$keys = explode('.', $key);
-
-		while (count($keys) > 1)
-		{
-			$key = array_shift($keys);
-
-			// If the key doesn't exist at this depth, we will just create an empty array
-			// to hold the next value, allowing us to create the arrays to hold final
-			// values at the correct depth. Then we'll keep digging into the array.
-			if ( ! isset($array[$key]) || ! is_array($array[$key]))
-			{
-				$array[$key] = array();
-			}
-
-			$array =& $array[$key];
-		}
-
-		$array[array_shift($keys)] = $value;
-
-		return $array;
-	}
-}
-
-if ( ! function_exists('array_sort'))
-{
-	/**
-	 * Sort the array using the given Closure.
-	 *
-	 * @param  array  $array
-	 * @param  \Closure  $callback
-	 * @return array
-	 */
-	function array_sort($array, Closure $callback)
-	{
-		return Illuminate\Support\Collection::make($array)->sortBy($callback)->all();
-	}
-}
-
-if ( ! function_exists('array_where'))
-{
-	/**
-	 * Filter the array using the given Closure.
-	 *
-	 * @param  array  $array
-	 * @param  \Closure  $callback
-	 * @return array
-	 */
-	function array_where($array, Closure $callback)
-	{
-		$filtered = array();
-
-		foreach ($array as $key => $value)
-		{
-			if (call_user_func($callback, $key, $value)) $filtered[$key] = $value;
-		}
-
-		return $filtered;
-	}
-}
-
-if ( ! function_exists('asset'))
-{
-	/**
-	 * Generate an asset path for the application.
-	 *
-	 * @param  string  $path
-	 * @param  bool    $secure
-	 * @return string
-	 */
-	function asset($path, $secure = null)
-	{
-		return app('url')->asset($path, $secure);
-	}
-}
-
-if ( ! function_exists('base_path'))
-{
-	/**
-	 * Get the path to the base of the install.
-	 *
-	 * @param  string  $path
-	 * @return string
-	 */
-	function base_path($path = '')
-	{
-		return app()->make('path.base').($path ? '/'.$path : $path);
-	}
-}
-
-if ( ! function_exists('camel_case'))
-{
-	/**
-	 * Convert a value to camel case.
-	 *
-	 * @param  string  $value
-	 * @return string
-	 */
-	function camel_case($value)
-	{
-		return Str::camel($value);
-	}
-}
-
-if ( ! function_exists('class_basename'))
-{
-	/**
-	 * Get the class "basename" of the given object / class.
-	 *
-	 * @param  string|object  $class
-	 * @return string
-	 */
-	function class_basename($class)
-	{
-		$class = is_object($class) ? get_class($class) : $class;
-
-		return basename(str_replace('\\', '/', $class));
-	}
-}
-
-if ( ! function_exists('csrf_token'))
-{
-	/**
-	 * Get the CSRF token value.
-	 *
-	 * @return string
-	 *
-	 * @throws RuntimeException
-	 */
-	function csrf_token()
-	{
-		$session = app('session');
-
-		if (isset($session))
-		{
-			return $session->getToken();
-		}
-		else
-		{
-			throw new RuntimeException("Application session store not set.");
-		}
-	}
-}
-
-if ( ! function_exists('data_get'))
-{
-	/**
-	 * Get an item from an array or object using "dot" notation.
-	 *
-	 * @param  mixed   $target
-	 * @param  string  $key
-	 * @param  mixed   $default
-	 * @return mixed
-	 */
-	function data_get($target, $key, $default = null)
-	{
-		if (is_null($key)) return $target;
-
-		foreach (explode('.', $key) as $segment)
-		{
-			if (is_array($target))
-			{
-				if ( ! array_key_exists($segment, $target))
-				{
-					return value($default);
-				}
-
-				$target = $target[$segment];
-			}
-			elseif (is_object($target))
-			{
-				if ( ! isset($target->{$segment}))
-				{
-					return value($default);
-				}
-
-				$target = $target->{$segment};
-			}
-			else
-			{
-				return value($default);
-			}
-		}
-
-		return $target;
-	}
-}
-
-if ( ! function_exists('dd'))
-{
-	/**
-	 * Dump the passed variables and end the script.
-	 *
-	 * @param  dynamic  mixed
-	 * @return void
-	 */
-	function dd()
-	{
-		array_map(function($x) { var_dump($x); }, func_get_args()); die;
-	}
-}
-
-if ( ! function_exists('e'))
-{
-	/**
-	 * Escape HTML entities in a string.
-	 *
-	 * @param  string  $value
-	 * @return string
-	 */
-	function e($value)
-	{
-		return htmlentities($value, ENT_QUOTES, 'UTF-8', false);
-	}
-}
-
-if ( ! function_exists('ends_with'))
-{
-	/**
-	 * Determine if a given string ends with a given substring.
-	 *
-	 * @param string  $haystack
-	 * @param string|array  $needle
-	 * @return bool
-	 */
-	function ends_with($haystack, $needle)
-	{
-		return Str::endsWith($haystack, $needle);
-	}
-}
-
-if ( ! function_exists('head'))
-{
-	/**
-	 * Get the first element of an array. Useful for method chaining.
-	 *
-	 * @param  array  $array
-	 * @return mixed
-	 */
-	function head($array)
-	{
-		return reset($array);
-	}
-}
-
-if ( ! function_exists('link_to'))
-{
-	/**
-	 * Generate a HTML link.
-	 *
-	 * @param  string  $url
-	 * @param  string  $title
-	 * @param  array   $attributes
-	 * @param  bool    $secure
-	 * @return string
-	 */
-	function link_to($url, $title = null, $attributes = array(), $secure = null)
-	{
-		return app('html')->link($url, $title, $attributes, $secure);
-	}
-}
-
-if ( ! function_exists('last'))
-{
-	/**
-	 * Get the last element from an array.
-	 *
-	 * @param  array  $array
-	 * @return mixed
-	 */
-	function last($array)
-	{
-		return end($array);
-	}
-}
-
-if ( ! function_exists('link_to_asset'))
-{
-	/**
-	 * Generate a HTML link to an asset.
-	 *
-	 * @param  string  $url
-	 * @param  string  $title
-	 * @param  array   $attributes
-	 * @param  bool    $secure
-	 * @return string
-	 */
-	function link_to_asset($url, $title = null, $attributes = array(), $secure = null)
-	{
-		return app('html')->linkAsset($url, $title, $attributes, $secure);
-	}
-}
-
-if ( ! function_exists('link_to_route'))
-{
-	/**
-	 * Generate a HTML link to a named route.
-	 *
-	 * @param  string  $name
-	 * @param  string  $title
-	 * @param  array   $parameters
-	 * @param  array   $attributes
-	 * @return string
-	 */
-	function link_to_route($name, $title = null, $parameters = array(), $attributes = array())
-	{
-		return app('html')->linkRoute($name, $title, $parameters, $attributes);
-	}
-}
-
-if ( ! function_exists('link_to_action'))
-{
-	/**
-	 * Generate a HTML link to a controller action.
-	 *
-	 * @param  string  $action
-	 * @param  string  $title
-	 * @param  array   $parameters
-	 * @param  array   $attributes
-	 * @return string
-	 */
-	function link_to_action($action, $title = null, $parameters = array(), $attributes = array())
-	{
-		return app('html')->linkAction($action, $title, $parameters, $attributes);
-	}
-}
-
-if ( ! function_exists('object_get'))
-{
-	/**
-	 * Get an item from an object using "dot" notation.
-	 *
-	 * @param  object  $object
-	 * @param  string  $key
-	 * @param  mixed   $default
-	 * @return mixed
-	 */
-	function object_get($object, $key, $default = null)
-	{
-		if (is_null($key) || trim($key) == '') return $object;
-
-		foreach (explode('.', $key) as $segment)
-		{
-			if ( ! is_object($object) || ! isset($object->{$segment}))
-			{
-				return value($default);
-			}
-
-			$object = $object->{$segment};
-		}
-
-		return $object;
-	}
-}
-
-if ( ! function_exists('preg_replace_sub'))
-{
-	/**
-	 * Replace a given pattern with each value in the array in sequentially.
-	 *
-	 * @param  string  $pattern
-	 * @param  array   $replacements
-	 * @param  string  $subject
-	 * @return string
-	 */
-	function preg_replace_sub($pattern, &$replacements, $subject)
-	{
-		return preg_replace_callback($pattern, function($match) use (&$replacements)
-		{
-			return array_shift($replacements);
-
-		}, $subject);
-	}
-}
-
-if ( ! function_exists('public_path'))
-{
-	/**
-	 * Get the path to the public folder.
-	 *
-	 * @param  string  $path
-	 * @return string
-	 */
-	function public_path($path = '')
-	{
-		return app()->make('path.public').($path ? '/'.$path : $path);
-	}
-}
-
-if ( ! function_exists('route'))
-{
-	/**
-	 * Generate a URL to a named route.
-	 *
-	 * @param  string  $route
-	 * @param  array   $parameters
-	 * @return string
-	 */
-	function route($route, $parameters = array())
-	{
-		return app('url')->route($route, $parameters);
-	}
-}
-
-if ( ! function_exists('secure_asset'))
-{
-	/**
-	 * Generate an asset path for the application.
-	 *
-	 * @param  string  $path
-	 * @return string
-	 */
-	function secure_asset($path)
-	{
-		return asset($path, true);
-	}
-}
-
-if ( ! function_exists('secure_url'))
-{
-	/**
-	 * Generate a HTTPS url for the application.
-	 *
-	 * @param  string  $path
-	 * @param  mixed   $parameters
-	 * @return string
-	 */
-	function secure_url($path, $parameters = array())
-	{
-		return url($path, $parameters, true);
-	}
-}
-
-if ( ! function_exists('snake_case'))
-{
-	/**
-	 * Convert a string to snake case.
-	 *
-	 * @param  string  $value
-	 * @param  string  $delimiter
-	 * @return string
-	 */
-	function snake_case($value, $delimiter = '_')
-	{
-		return Str::snake($value, $delimiter);
-	}
-}
-
-if ( ! function_exists('starts_with'))
-{
-	/**
-	 * Determine if a given string starts with a given substring.
-	 *
-	 * @param  string  $haystack
-	 * @param  string|array  $needle
-	 * @return bool
-	 */
-	function starts_with($haystack, $needle)
-	{
-		return Str::startsWith($haystack, $needle);
-	}
-}
-
-if ( ! function_exists('storage_path'))
-{
-	/**
-	 * Get the path to the storage folder.
-	 *
-	 * @param   string  $path
-	 * @return  string
-	 */
-	function storage_path($path = '')
-	{
-		return app('path.storage').($path ? '/'.$path : $path);
-	}
-}
-
-if ( ! function_exists('str_contains'))
-{
-	/**
-	 * Determine if a given string contains a given substring.
-	 *
-	 * @param  string  $haystack
-	 * @param  string|array  $needle
-	 * @return bool
-	 */
-	function str_contains($haystack, $needle)
-	{
-		return Str::contains($haystack, $needle);
-	}
-}
-
-if ( ! function_exists('str_finish'))
-{
-	/**
-	 * Cap a string with a single instance of a given value.
-	 *
-	 * @param  string  $value
-	 * @param  string  $cap
-	 * @return string
-	 */
-	function str_finish($value, $cap)
-	{
-		return Str::finish($value, $cap);
-	}
-}
-
-if ( ! function_exists('str_is'))
-{
-	/**
-	 * Determine if a given string matches a given pattern.
-	 *
-	 * @param  string  $pattern
-	 * @param  string  $value
-	 * @return bool
-	 */
-	function str_is($pattern, $value)
-	{
-		return Str::is($pattern, $value);
-	}
-}
-
-if ( ! function_exists('str_limit'))
-{
-	/**
-	 * Limit the number of characters in a string.
-	 *
-	 * @param  string $value
-	 * @param  int    $limit
-	 * @param  string $end
-	 * @return string
-	 */
-	function str_limit($value, $limit = 100, $end = '...')
-	{
-		return Str::limit($value, $limit, $end);
-	}
-}
-
-if ( ! function_exists('str_plural'))
-{
-	/**
-	 * Get the plural form of an English word.
-	 *
-	 * @param  string  $value
-	 * @param  int  $count
-	 * @return string
-	 */
-	function str_plural($value, $count = 2)
-	{
-		return Str::plural($value, $count);
-	}
-}
-
-if ( ! function_exists('str_random'))
-{
-	/**
-	 * Generate a more truly "random" alpha-numeric string.
-	 *
-	 * @param  int     $length
-	 * @return string
-	 *
-	 * @throws \RuntimeException
-	 */
-	function str_random($length = 16)
-	{
-		return Str::random($length);
-	}
-}
-
-if ( ! function_exists('str_replace_array'))
-{
-	/**
-	 * Replace a given value in the string sequentially with an array.
-	 *
-	 * @param  string  $search
-	 * @param  array   $replace
-	 * @param  string  $subject
-	 * @return string
-	 */
-	function str_replace_array($search, array $replace, $subject)
-	{
-		foreach ($replace as $value)
-		{
-			$subject = preg_replace('/'.$search.'/', $value, $subject, 1);
-		}
-
-		return $subject;
-	}
-}
-
-if ( ! function_exists('str_singular'))
-{
-	/**
-	 * Get the singular form of an English word.
-	 *
-	 * @param  string  $value
-	 * @return string
-	 */
-	function str_singular($value)
-	{
-		return Str::singular($value);
-	}
-}
-
-if ( ! function_exists('studly_case'))
-{
-	/**
-	 * Convert a value to studly caps case.
-	 *
-	 * @param  string  $value
-	 * @return string
-	 */
-	function studly_case($value)
-	{
-		return Str::studly($value);
-	}
-}
-
-if ( ! function_exists('trans'))
-{
-	/**
-	 * Translate the given message.
-	 *
-	 * @param  string  $id
-	 * @param  array   $parameters
-	 * @param  string  $domain
-	 * @param  string  $locale
-	 * @return string
-	 */
-	function trans($id, $parameters = array(), $domain = 'messages', $locale = null)
-	{
-		return app('translator')->trans($id, $parameters, $domain, $locale);
-	}
-}
-
-if ( ! function_exists('trans_choice'))
-{
-	/**
-	 * Translates the given message based on a count.
-	 *
-	 * @param  string  $id
-	 * @param  int     $number
-	 * @param  array   $parameters
-	 * @param  string  $domain
-	 * @param  string  $locale
-	 * @return string
-	 */
-	function trans_choice($id, $number, array $parameters = array(), $domain = 'messages', $locale = null)
-	{
-		return app('translator')->transChoice($id, $number, $parameters, $domain, $locale);
-	}
-}
-
-if ( ! function_exists('url'))
-{
-	/**
-	 * Generate a url for the application.
-	 *
-	 * @param  string  $path
-	 * @param  mixed   $parameters
-	 * @param  bool    $secure
-	 * @return string
-	 */
-	function url($path = null, $parameters = array(), $secure = null)
-	{
-		return app('url')->to($path, $parameters, $secure);
-	}
-}
-
-if ( ! function_exists('value'))
-{
-	/**
-	 * Return the default value of the given value.
-	 *
-	 * @param  mixed  $value
-	 * @return mixed
-	 */
-	function value($value)
-	{
-		return $value instanceof Closure ? $value() : $value;
-	}
-}
-
-if ( ! function_exists('with'))
-{
-	/**
-	 * Return the given object. Useful for chaining.
-	 *
-	 * @param  mixed  $object
-	 * @return mixed
-	 */
-	function with($object)
-	{
-		return $object;
-	}
-}
 }
 

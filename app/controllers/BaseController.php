@@ -71,4 +71,19 @@ class BaseController extends Controller
         unset($parendval);
         return $menus;
     }
+    
+
+    /**
+     * 返回方法
+     *
+     * @param String $msg
+     * @param int $code
+     */
+    protected function toJson($msg, $code, $data = false) {
+        return Response::json(array (
+            'code' => $code,
+            'message' => $msg,
+            'data' => $data
+        ));
+    }
 }
