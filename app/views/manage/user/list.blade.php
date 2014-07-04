@@ -9,7 +9,9 @@
             <th>Email</th>
             <th>ip</th>
             <th>最后登录时间</th>
+            <?php if (is_super_admin()){?>
             <th>&nbsp;</th>
+            <?php }?>
          </tr>
       </thead>
       <tbody>
@@ -17,49 +19,32 @@
    </table>
 </div><!-- table-responsive -->
           
-<!-- Modal -->
-<button class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-static">Launch Modal</button>
-
-<!-- Modal -->
-<div class="modal fade bs-example-modal-static" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" data-backdrop="static" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-        <div class="modal-header">
-            <button aria-hidden="true" data-dismiss="modal" class="close" type="button">&times;</button>
-            <h4 class="modal-title">Static Background</h4>
-        </div>
-        <div class="modal-body">
-            Specify static for a backdrop which doesn't close the modal on click.
-        </div>
-    </div>
-  </div>
-</div>
-<!--  -->
-<!-- Button trigger modal -->
-<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-  Launch demo modal
-  ##http://v3.bootcss.com/javascript/#tooltips
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<!-- deleteModal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+        <h4 class="modal-title" id="myModalLabel">删除</h4>
       </div>
       <div class="modal-body">
-        ...
+          
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
       </div>
     </div>
   </div>
 </div>
 
+<!-- editModal -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog">
+    <div class="modal-content">
+    </div>
+  </div>
+</div>
 
 @stop
 
@@ -73,7 +58,6 @@
 
 <script type="text/javascript">
   jQuery(document).ready(function() {
-	  
     jQuery('#table2').dataTable({
       "processing": true,
       "serverSide": true,
@@ -103,13 +87,31 @@
       	    });
 
       	    jQuery('.delete-row').click(function(){
-      	      var c = confirm("确定要删除该用户["+ $(this).attr('title') +"]吗?");
-      	      if(c)
-      	        jQuery(this).closest('tr').fadeOut(function(){
-      	            jQuery(this).remove();
-      	        });
-      	        return false;
+          	    $this = $(this);
+          	    $("#deleteModal .modal-body").html("确定要删除用户["+ $this.attr('title') +"]吗?");
+
+          	    $("#deleteModal .modal-footer .btn-primary").off('click').on('click', function(){
+
+          	    var deleteurl = "{{url('manage/user')}}" + "/" + $this.attr('rel');
+          	        $.ajax({
+          	    	    url: deleteurl,
+            	    	dataType: 'json',
+        	    	    type: 'DELETE'
+        	    	}).done(function(data){
+                        if (data.code == 0) {
+                          $this.closest('tr').fadeOut(function(){
+                              $this.remove();
+                          });
+                          notify('提示', data.message, 'success');
+                        } else {
+                          notify('提示', data.message, 'danger');
+                        }
+            	    })
+                    .fail(function(){ alert("出错啦！"); });
+              	});
       	    });
+
+      	    
       },
       "sPaginationType": "full_numbers",
       "oLanguage": {

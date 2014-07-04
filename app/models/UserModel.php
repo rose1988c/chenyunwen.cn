@@ -16,27 +16,25 @@ class UserModel extends Eloquent implements RemindableInterface, UserInterface
     protected $fillable = array ();
     protected $guarded = array ();
     protected $hidden = array('password', 'remember_token', 'deleted_at');
+    protected $softDelete = true;
     
     public function getReminderEmail()
     {
         return $this->username;
     }
-	/* (non-PHPdoc)
-     * @see \Illuminate\Auth\UserInterface::getAuthIdentifier()
-     */
+    
     public function getAuthIdentifier()
     {
-        // TODO Auto-generated method stub
         return $this->attributes['id'];
-        
+    }
+    
+    public function getAuthRoleId()
+    {
+        return $this->attributes['roleid'];
     }
 
-	/* (non-PHPdoc)
-     * @see \Illuminate\Auth\UserInterface::getAuthPassword()
-     */
     public function getAuthPassword()
     {
-        // TODO Auto-generated method stub
         return $this->attributes['password'];
     }
 

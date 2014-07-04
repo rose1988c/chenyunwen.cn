@@ -10,6 +10,6 @@ class HomeController extends BaseController
         if (Auth::check ()) {
             echo Auth::user()->username . '  ';
         }
-        return 'hello, everybody!';
+        return 'hello, everybody! <a href="/manage">传送后台</a>';
     }
 }

@@ -111,6 +111,8 @@ return array(
 	    'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
 	    // datatables #https://github.com/bllim/laravel4-datatables-package
 	    'Bllim\Datatables\DatatablesServiceProvider',
+	    //way
+	    'Way\Generators\GeneratorsServiceProvider'
 	),
 
 	/*

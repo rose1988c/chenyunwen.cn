@@ -16,13 +16,16 @@ Route::any('/logwait',  'AccountController@logwait');
 
 //------------------------------- 后台管理 -------------------------------
 Route::group(array('prefix' => 'manage', 'before' => 'auth.manage'),function() {
-    Route::get('/', array('as'=>'manage','uses' => 'ManageController@index'));
     
+    // 后台首页
+    Route::get('/', array('as'=>'manage','uses' => 'ManageController@index'));
+
     // 用户管理
     Route::group(array('prefix' => 'user'),function() {
-        Route::get('list', 'UserController@userList');
         Route::get('list/ajax', 'UserController@userList_ajax');
     });
+    Route::resource('user', 'UserController');
+    
 });
 
 //------------------------------- 本地使用 -------------------------------
