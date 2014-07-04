@@ -8,10 +8,15 @@ This is an Manage System for Laravel 4.
 
 ```json
 {
-    "require": {
-        "laravel/laravel":"4.1",
+	"require": {
+		"laravel/framework": "4.1.*",
+		"barryvdh/laravel-ide-helper": "1.*",
+		"bllim/datatables": "*",
         "way/generators": "2.*",
         "guzzlehttp/guzzle": "~4.0"
-    }
+	}
 }
 ```
+#### 导入sql
+
+	app\config\schema\mcc_cluster.sql

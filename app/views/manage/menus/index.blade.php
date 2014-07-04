@@ -20,16 +20,24 @@
          </tr>
       </thead>
       <tbody>
-            <?php foreach ((array)$meaus as $meau) { ?>
+            <?php foreach ((array)$menus as $meau) { ?>
             <tr>
             	<td>{{$meau['id']}}</td>
             	<td>{{$meau['parentid']}}</td>
-            	<td>{{$meau['name']}}</td>
-            	<td>{{$meau['url']}}</td>
-            	<td>{{$meau['icons']}}</td>
+            	<td>
+            	    <?php if ($meau['parentid'] == 0 ) {?>
+            	    <span class="label label-success">{{$meau['name']}}</span>
+            	    <?php } else {?>
+            	    <span class="label label-default">{{$meau['name']}}</span>
+            	    <?php }?>
+            	</td>
+            	<td><code>{{$meau['url']}}</code></td>
+            	<td>
+            	    <i class="{{$meau['icons']}}"></i> {{$meau['icons']}}
+            	</td>
             	<td>{{$meau['sorts']}}</td>
             	<td>
-                    <a href="{{url('manage/meau/' . $meau['id'], 'edit')}}" data-toggle="modal" data-target="#editModal"><i class="fa fa-pencil"></i></a>
+                    <a href="{{url('manage/menus/' . $meau['id'], 'edit')}}" data-toggle="modal" data-target="#editModal"><i class="fa fa-pencil"></i></a>
                     <a href="#deleteModal" rel="{{$meau['id']}}" title="{{$meau['name']}}" data-toggle="modal" data-target="#deleteModal" class="delete-row"><i class="fa fa-trash-o"></i></a>
                 </td>
             </tr>
@@ -94,7 +102,7 @@
 
       	    $("#deleteModal .modal-footer .btn-primary").off('click').on('click', function(){
 
-      	    var deleteurl = "{{url('manage/meau')}}" + "/" + $this.attr('rel');
+      	    var deleteurl = "{{url('manage/menus')}}" + "/" + $this.attr('rel');
       	        $.ajax({
       	    	    url: deleteurl,
         	    	dataType: 'json',

@@ -12,9 +12,9 @@ class MenusController extends \BaseController
      * @return Response
      */
     public function index() {
-        $meaus = MenuModel::all()->toArray();
+        $menus = MenuModel::all()->toArray();
         $this->layout->with('title', '菜单列表');
-        $this->layout->content = View::make('manage.menus.index')->with(compact('meaus'));
+        $this->layout->content = View::make('manage.menus.index')->with(compact('menus'));
     }
 
     /**
@@ -56,7 +56,9 @@ class MenusController extends \BaseController
      * @return Response
      */
     public function edit($id) {
-        //
+        $menu = MenuModel::find($id)->toArray();
+        
+        return View::make('manage.menus.edit')->with(compact('menu'));
     }
 
     /**
