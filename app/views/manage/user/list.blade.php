@@ -1,4 +1,5 @@
 @section('content')
+<!-- ajax 方式 -->
 <div class="table-responsive">
   <table class="table table-bordered table-hover" id="table2">
       <thead>
@@ -110,8 +111,6 @@
                     .fail(function(){ alert("出错啦！"); });
               	});
       	    });
-
-      	    
       },
       "sPaginationType": "full_numbers",
       "oLanguage": {

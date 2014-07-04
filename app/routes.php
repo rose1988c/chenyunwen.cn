@@ -26,6 +26,12 @@ Route::group(array('prefix' => 'manage', 'before' => 'auth.manage'),function() {
     });
     Route::resource('user', 'UserController');
     
+    // 菜单管理
+    Route::resource('menus', 'MenusController');
+    
+    // 角色管理
+    Route::resource('roles', 'RolesController');
+    
 });
 
 //------------------------------- 本地使用 -------------------------------

@@ -13,4 +13,5 @@ class MenuModel extends Eloquent
     protected $table = 'mcc_menu';
     protected $fillable = array();
     protected $guarded  = array();
+    protected $softDelete = true;
 }

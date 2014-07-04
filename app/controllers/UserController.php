@@ -11,7 +11,6 @@
 class UserController extends BaseController
 {
     protected $layout = 'layouts.manage';
-    protected $data = array();
     
     // restfull
     /**
@@ -22,10 +21,8 @@ class UserController extends BaseController
      */
     public function index()
     {
-        $users = array();
-        
         $this->layout->with('title', '用户列表');
-        $this->layout->content = View::make('manage.user.list')->with(compact('users'));
+        $this->layout->content = View::make('manage.user.list');
     }
     
     /**
