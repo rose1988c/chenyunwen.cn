@@ -1,6 +1,6 @@
 @section('content')
 <p>
-    <button class="btn btn-primary">添加菜单</button>
+    <a class="btn btn-primary" href="{{url('manage/menus/create')}}" data-toggle="modal" data-target="#addModal">添加菜单</a>
 </p>
 
 <!-- 普通方式，数据量小的情况 -->
@@ -61,6 +61,14 @@
         <button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- addModal -->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog">
+    <div class="modal-content">
     </div>
   </div>
 </div>
@@ -126,6 +134,11 @@
           "sUrl" : "{{asset('/assets/package/datatables/jquery.datatables.surl.cn-zn.txt')}}"
       }
     });
+
+    $("#editModal, #addModal").on("hidden.bs.modal", function() {
+        $(this).removeData("bs.modal");
+    });
+    
   });
 </script>
 @stop

@@ -30,7 +30,7 @@
 		</div>
 
 		<div class="form-group">
-			<label class="col-sm-4 control-label">图标:</label>
+			<label class="col-sm-4 control-label">图标<a href="//v3.bootcss.com/components/#glyphicons" data-original-title="图标选择" target="_blank">go</a>:</label>
 			<div class="col-sm-6">
 				<input type="email" name="icons" value="{{$menu['icons']}}" class="form-control">
 			</div>
@@ -39,7 +39,7 @@
 		<div class="form-group">
 			<label class="col-sm-4 control-label">排序:</label>
 			<div class="col-sm-6">
-				<input type="email" name="sorts" value="{{$menu['sorts']}}" class="form-control">
+			    <?php echo Service\Common\Html::select('sorts', 'sorts', range(0, 100), $menu['sorts'], false, 'form-control');?>
 			</div>
 		</div>
 
@@ -54,7 +54,7 @@
 
     $(document).ready(function(){
         $(".userupdate").click(function(){
-            var url = "{{url('manage/meaus/' . $menu['id'])}}";
+            var url = "{{url('manage/menus/' . $menu['id'])}}";
             $.ajax({
                 url : url,
                 data : $('#editform').serialize(),

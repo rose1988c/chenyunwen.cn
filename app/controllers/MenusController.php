@@ -42,7 +42,18 @@ class MenusController extends \BaseController
      * @return Response
      */
     public function create() {
-        //
+        //parents menus
+        $menus = $this->menus;
+        $menus = array_filter($this->menus, function ($v) {
+            if($v ['parentid'] == 0) {
+                return true;
+            }
+            return false;
+        });
+        $menus = \Service\Common\Util::ArrayColumn($menus, 'id', 'name');
+        //parents menus end
+        
+        return View::make('manage.menus.create')->with(compact('menus'));
     }
 
     /**
@@ -52,7 +63,23 @@ class MenusController extends \BaseController
      * @return Response
      */
     public function store() {
-        //
+        if (is_super_admin()){
+            $res = MenuModel::create(array(
+                'parentid' => e(Input::get('parentid')),
+                'name' => e(Input::get('name')),
+                'url' => e(Input::get('url')),
+                'icons' => e(Input::get('icons')),
+                'sorts' => e(Input::get('sorts')),
+            ));
+            $code = is_object($res) ? 0 : 1;
+            
+            // clean cache
+            $this->removeCache();
+            
+            return $this->toJson('更新成功!', $code);
+        } else {
+            return $this->toJson('您没有权限!', 1);
+        }
     }
 
     /**
@@ -85,6 +112,7 @@ class MenusController extends \BaseController
             return false;
         });
         $menus = \Service\Common\Util::ArrayColumn($menus, 'id', 'name');
+        //parents menus end
         
         return View::make('manage.menus.edit')->with(compact('menus', 'menu'));
     }
@@ -97,7 +125,23 @@ class MenusController extends \BaseController
      * @return Response
      */
     public function update($id) {
-        //
+        if (is_super_admin()){
+            $res = MenuModel::where('id', $id)->update(array(
+                'parentid' => e(Input::get('parentid')),
+                'name' => e(Input::get('name')),
+                'url' => e(Input::get('url')),
+                'icons' => e(Input::get('icons')),
+                'sorts' => e(Input::get('sorts')),
+            ));
+            $code = $res > 0 ? 0 : 1;
+            
+            // clean cache
+            $this->removeCache();
+            
+            return $this->toJson('更新成功!', $code);
+        } else {
+            return $this->toJson('您没有权限!', 1);
+        }
     }
 
     /**
@@ -108,7 +152,16 @@ class MenusController extends \BaseController
      * @return Response
      */
     public function destroy($id) {
-        //
+        if (is_super_admin()){
+            $res = MenuModel::where('id', $id)->delete();
+            $code = $res > 0 ? 0 : 1;
+            // clean cache
+            $this->removeCache();
+        
+            return $this->toJson('删除成功!', $code);
+        } else {
+            return $this->toJson('您没有权限!', 1);
+        }
     }
 
 }

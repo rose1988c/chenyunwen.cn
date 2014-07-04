@@ -117,6 +117,10 @@
           "sUrl" : "{{asset('/assets/package/datatables/jquery.datatables.surl.cn-zn.txt')}}"
       }
     });
+
+    $("#editModal").on("hidden.bs.modal", function() {
+        $(this).removeData("bs.modal");
+    });
   
   });
 </script>
