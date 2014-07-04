@@ -1,9 +1,27 @@
 <?php
-
 class MenusController extends \BaseController
 {
     
     protected $layout = 'layouts.manage';
+    
+    protected $menus;
+    protected $cache_menus;
+    
+    public function __construct()
+    {
+        $this->cache_menus = sprintf('%s_%s_%s', __CLASS__, __FILE__, 'menus');
+        $this->menus = Cache::get($this->cache_menus);
+        if (!$this->menus)
+        {
+            $this->menus = MenuModel::all()->toArray();
+            Cache::put($this->cache_menus, $this->menus, 60);
+        }
+    }
+    
+    private function removeCache()
+    {
+        Cache::forget($this->cache_menus);
+    }
 
     /**
      * Display a listing of the resource.
@@ -12,7 +30,7 @@ class MenusController extends \BaseController
      * @return Response
      */
     public function index() {
-        $menus = MenuModel::all()->toArray();
+        $menus = $this->menus;
         $this->layout->with('title', '菜单列表');
         $this->layout->content = View::make('manage.menus.index')->with(compact('menus'));
     }
@@ -45,9 +63,9 @@ class MenusController extends \BaseController
      * @return Response
      */
     public function show($id) {
-        //
+        $menus = Service\Common\Util::listToTree($this->menus,'id','parentid');
     }
-
+    
     /**
      * Show the form for editing the specified resource.
      * GET /menus/{id}/edit
