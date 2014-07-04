@@ -63,7 +63,7 @@ class MenusController extends \BaseController
      * @return Response
      */
     public function show($id) {
-        $menus = Service\Common\Util::listToTree($this->menus,'id','parentid');
+        //$menus = Service\Common\Util::listToTree($this->menus,'id','parentid');
     }
     
     /**
@@ -76,7 +76,17 @@ class MenusController extends \BaseController
     public function edit($id) {
         $menu = MenuModel::find($id)->toArray();
         
-        return View::make('manage.menus.edit')->with(compact('menu'));
+        //parents menus
+        $menus = $this->menus;
+        $menus = array_filter($this->menus, function ($v) {
+            if($v ['parentid'] == 0) {
+                return true;
+            }
+            return false;
+        });
+        $menus = \Service\Common\Util::ArrayColumn($menus, 'id', 'name');
+        
+        return View::make('manage.menus.edit')->with(compact('menus', 'menu'));
     }
 
     /**
