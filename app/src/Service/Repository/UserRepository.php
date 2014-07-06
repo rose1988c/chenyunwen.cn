@@ -11,4 +11,18 @@
 namespace Service\Repository;
 class UserRepository {
     
+    /**
+     * 获取后台登陆用户的菜单
+     */
+    public static function getAuthMenus()
+    {
+        $meaus = array();
+        
+        // 当前用户可赋予的权限
+        $userRoleId = \Auth::user()->getAuthRoleId();
+        $userRole = \RoleModel::find($userRoleId)->toArray();
+        $meaus = explode(',', $userRole['mid']);
+        
+        return $meaus;
+    }
 }

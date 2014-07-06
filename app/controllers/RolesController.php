@@ -57,9 +57,7 @@ class RolesController extends \BaseController
      */
     public function show($id) {
         // 当前用户可赋予的权限
-        $userRoleId = Auth::user()->getAuthRoleId();
-        $userRole = RoleModel::find($userRoleId)->toArray();
-        $userMids = explode(',', $userRole['mid']);
+        $userMids = Service\Repository\UserRepository::getAuthMenus();
         
         // 角色
         $role = RoleModel::find($id)->toArray();

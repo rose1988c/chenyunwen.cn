@@ -31,6 +31,16 @@ class BaseController extends Controller
         $menu = MenuModel::where('pid', 0)->orderBy('sorts', 'DESC')->get()->toArray();
         $menus = \Service\Common\Util::ArrayColumn($menu, 'id', 'id,pid,name,url,icons');
         
+        //userMids 
+        $userMids = Service\Repository\UserRepository::getAuthMenus();
+        
+        $menus = array_filter($menus, function($v) use ($userMids) {
+            if ( in_array($v['id'], $userMids) || in_array($v['pid'], $userMids) || current($userMids) == 'all' )
+            {
+                return true;
+            } 
+        });
+        
         foreach($menus as $pid => &$parendval) {
             // 定义
             $parendval ['is_active'] = '';

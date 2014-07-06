@@ -39,14 +39,6 @@ CREATE TABLE `mcc_action_log` (
 ) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of mcc_action_log
--- ----------------------------
-INSERT INTO `mcc_action_log` VALUES ('1', 'admin', '127.0.0.1', 'POST', 'login', 'http://www.mywww.com/login', '2014-07-02 14:03:11', '2014-07-02 14:03:11');
-INSERT INTO `mcc_action_log` VALUES ('2', 'admin', '127.0.0.1', 'POST', 'login', 'http://www.mywww.com/login', '2014-07-03 09:26:12', '2014-07-03 09:26:12');
-INSERT INTO `mcc_action_log` VALUES ('3', 'admin', '127.0.0.1', 'POST', 'login', 'http://www.mywww.com/login', '2014-07-03 17:38:35', '2014-07-03 17:38:35');
-INSERT INTO `mcc_action_log` VALUES ('4', 'admin', '127.0.0.1', 'POST', 'login', 'http://www.mywww.com/login', '2014-07-04 09:00:16', '2014-07-04 09:00:16');
-
--- ----------------------------
 -- Table structure for mcc_menu
 -- ----------------------------
 DROP TABLE IF EXISTS `mcc_menu`;
@@ -79,6 +71,7 @@ INSERT INTO `mcc_menu` VALUES ('8', '7', '角色管理', 'manage/roles', 'fa fa-
 DROP TABLE IF EXISTS `mcc_role`;
 CREATE TABLE `mcc_role` (
   `id` smallint(6) NOT NULL AUTO_INCREMENT,
+  `mid` varchar(255) DEFAULT NULL COMMENT '菜单id',
   `name` varchar(255) NOT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
@@ -86,12 +79,14 @@ CREATE TABLE `mcc_role` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
 
+ALTER TABLE `mcc_role` ADD INDEX `idx_mid` (`mid`) ;
+
 -- ----------------------------
 -- Records of mcc_role
 -- ----------------------------
-INSERT INTO `mcc_role` VALUES ('2', '普通用户', null, null, null);
-INSERT INTO `mcc_role` VALUES ('1', '管理员', null, null, null);
-INSERT INTO `mcc_role` VALUES ('0', '超级管理员', null, null, null);
+INSERT INTO `mcc_role` (`id`, `mid`, `name`, `created_at`, `updated_at`, `deleted_at`) VALUES ('0', 'all', '超级管理员', NULL, '2014-07-06 17:51:26', NULL);
+INSERT INTO `mcc_role` (`id`, `mid`, `name`, `created_at`, `updated_at`, `deleted_at`) VALUES ('1', '2,4', '管理员', NULL, '2014-07-06 18:00:13', NULL);
+INSERT INTO `mcc_role` (`id`, `mid`, `name`, `created_at`, `updated_at`, `deleted_at`) VALUES ('2', '1,2,4', '普通用户', NULL, '2014-07-06 18:36:58', NULL);
 
 -- ----------------------------
 -- Table structure for mcc_role_panel
