@@ -11,7 +11,7 @@
          <tr>
             <th>id</th>
             <th>名称</th>
-            <?php if (is_super_admin()){?>
+            <?php if (is_admin()){?>
             <th>&nbsp;</th>
             <?php }?>
          </tr>
@@ -21,10 +21,15 @@
             <tr>
             	<td>{{$role['id']}}</td>
             	<td>{{$role['name']}}</td>
-            	<?php if (is_super_admin()){?>
+            	<?php if (is_admin()){?>
             	<td>
+            	    <?php if ($role['id'] !== USER_ROLE_SUPER_ADMIN) {?>
+                    <a href="{{url('manage/roles', $role['id'])}}" data-toggle="modal" data-target="#authModal"><i class="glyphicon glyphicon-check"></i></a>
+                    <?php }?>
+                    <?php if (is_super_admin()){?>
                     <a href="{{url('manage/roles/' . $role['id'], 'edit')}}" data-toggle="modal" data-target="#editModal"><i class="fa fa-pencil"></i></a>
                     <a href="#deleteModal" rel="{{$role['id']}}" title="{{$role['name']}}" data-toggle="modal" data-target="#deleteModal" class="delete-row"><i class="fa fa-trash-o"></i></a>
+                    <?php }?>
                 </td>
                 <?php }?>
             </tr>
@@ -62,6 +67,14 @@
 
 <!-- addModal -->
 <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog">
+    <div class="modal-content">
+    </div>
+  </div>
+</div>
+
+<!-- authModal -->
+<div class="modal fade" id="authModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
   <div class="modal-dialog">
     <div class="modal-content">
     </div>
@@ -122,7 +135,7 @@
       }
     });
 
-    $("#editModal").on("hidden.bs.modal", function() {
+    $("#editModal, #authModal").on("hidden.bs.modal", function() {
         $(this).removeData("bs.modal");
     });
   });

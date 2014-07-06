@@ -10,7 +10,7 @@
 			<label class="col-sm-4 control-label">父级ID:</label>
 			<div class="col-sm-6">
 			    <?php echo call_user_func_array(array('\Service\Common\Html', 'select'), array(
-			        'parentid', 'parentid', $menus, $menu['parentid'], '顶级', 'form-control'
+			        'pid', 'pid', $menus, $menu['pid'], '顶级', 'form-control'
 			    ));?>
 			</div>
 		</div>

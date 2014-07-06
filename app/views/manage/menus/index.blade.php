@@ -23,9 +23,9 @@
             <?php foreach ((array)$menus as $meau) { ?>
             <tr>
             	<td>{{$meau['id']}}</td>
-            	<td>{{$meau['parentid']}}</td>
+            	<td>{{$meau['pid']}}</td>
             	<td>
-            	    <?php if ($meau['parentid'] == 0 ) {?>
+            	    <?php if ($meau['pid'] == 0 ) {?>
             	    <span class="label label-success">{{$meau['name']}}</span>
             	    <?php } else {?>
             	    <span class="label label-default">{{$meau['name']}}</span>
@@ -36,10 +36,12 @@
             	    <i class="{{$meau['icons']}}"></i> {{$meau['icons']}}
             	</td>
             	<td>{{$meau['sorts']}}</td>
+                <?php if (is_super_admin()){?>
             	<td>
                     <a href="{{url('manage/menus/' . $meau['id'], 'edit')}}" data-toggle="modal" data-target="#editModal"><i class="fa fa-pencil"></i></a>
                     <a href="#deleteModal" rel="{{$meau['id']}}" title="{{$meau['name']}}" data-toggle="modal" data-target="#deleteModal" class="delete-row"><i class="fa fa-trash-o"></i></a>
                 </td>
+                <?php }?>
             </tr>
             <?php }?>
       </tbody>

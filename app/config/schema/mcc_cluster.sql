@@ -52,7 +52,7 @@ INSERT INTO `mcc_action_log` VALUES ('4', 'admin', '127.0.0.1', 'POST', 'login',
 DROP TABLE IF EXISTS `mcc_menu`;
 CREATE TABLE `mcc_menu` (
   `id` smallint(6) unsigned NOT NULL AUTO_INCREMENT,
-  `parentid` smallint(6) unsigned NOT NULL DEFAULT '0' COMMENT '父级ID',
+  `pid` smallint(6) unsigned NOT NULL DEFAULT '0' COMMENT '父级ID',
   `name` varchar(255) NOT NULL COMMENT '菜单名',
   `url` varchar(255) NOT NULL DEFAULT '' COMMENT 'URL路径',
   `icons` varchar(100) NOT NULL DEFAULT '' COMMENT '图标class',

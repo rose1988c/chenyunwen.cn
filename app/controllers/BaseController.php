@@ -28,19 +28,19 @@ class BaseController extends Controller
         //$name = strtolower(substr(get_class($this), 0, - 10));
         
         // 菜单
-        $menu = MenuModel::where('parentid', 0)->orderBy('sorts', 'DESC')->get()->toArray();
-        $menus = \Service\Common\Util::ArrayColumn($menu, 'id', 'id,parentid,name,url,icons');
+        $menu = MenuModel::where('pid', 0)->orderBy('sorts', 'DESC')->get()->toArray();
+        $menus = \Service\Common\Util::ArrayColumn($menu, 'id', 'id,pid,name,url,icons');
         
-        foreach($menus as $parentid => &$parendval) {
+        foreach($menus as $pid => &$parendval) {
             // 定义
             $parendval ['is_active'] = '';
             $parendval ['is_parent'] = '';
             $parendval ['nav-active'] = '';
             
             // 顶级菜单
-            if($parendval ['parentid'] == 0) {
+            if($parendval ['pid'] == 0) {
                 
-                $parendval ['submenu'] = MenuModel::where('parentid', $parentid)->get()->toArray();
+                $parendval ['submenu'] = MenuModel::where('pid', $pid)->get()->toArray();
                 $parendval ['is_parent'] = empty($parendval ['submenu']) ? '' : 'nav-parent';
                 
                 // 只有一级处理

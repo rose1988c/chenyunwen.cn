@@ -14,4 +14,5 @@ class MenuModel extends Eloquent
     protected $fillable = array();
     protected $guarded  = array();
     protected $softDelete = true;
+    protected $hidden = array('created_at', 'updated_at', 'deleted_at');
 }

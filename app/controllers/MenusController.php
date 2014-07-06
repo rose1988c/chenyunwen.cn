@@ -45,7 +45,7 @@ class MenusController extends \BaseController
         //parents menus
         $menus = $this->menus;
         $menus = array_filter($this->menus, function ($v) {
-            if($v ['parentid'] == 0) {
+            if($v ['pid'] == 0) {
                 return true;
             }
             return false;
@@ -65,7 +65,7 @@ class MenusController extends \BaseController
     public function store() {
         if (is_super_admin()){
             $res = MenuModel::create(array(
-                'parentid' => e(Input::get('parentid')),
+                'pid' => e(Input::get('pid')),
                 'name' => e(Input::get('name')),
                 'url' => e(Input::get('url')),
                 'icons' => e(Input::get('icons')),
@@ -90,7 +90,7 @@ class MenusController extends \BaseController
      * @return Response
      */
     public function show($id) {
-        //$menus = Service\Common\Util::listToTree($this->menus,'id','parentid');
+        //$menus = Service\Common\Util::listToTree($this->menus,'id','pid');
     }
     
     /**
@@ -106,7 +106,7 @@ class MenusController extends \BaseController
         //parents menus
         $menus = $this->menus;
         $menus = array_filter($this->menus, function ($v) {
-            if($v ['parentid'] == 0) {
+            if($v ['pid'] == 0) {
                 return true;
             }
             return false;
@@ -127,7 +127,7 @@ class MenusController extends \BaseController
     public function update($id) {
         if (is_super_admin()){
             $res = MenuModel::where('id', $id)->update(array(
-                'parentid' => e(Input::get('parentid')),
+                'pid' => e(Input::get('pid')),
                 'name' => e(Input::get('name')),
                 'url' => e(Input::get('url')),
                 'icons' => e(Input::get('icons')),

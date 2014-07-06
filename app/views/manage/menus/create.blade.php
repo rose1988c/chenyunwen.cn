@@ -10,7 +10,7 @@
 			<label class="col-sm-4 control-label">父级ID:</label>
 			<div class="col-sm-6">
 			    <?php echo call_user_func_array(array('\Service\Common\Html', 'select'), array(
-			        'parentid', 'parentid', $menus, null, '顶级', 'form-control'
+			        'pid', 'pid', $menus, null, '顶级', 'form-control'
 			    ));?>
 			</div>
 		</div>
@@ -62,6 +62,7 @@
             }).done(function(data){
                 if (data.code == 0) {
                   notify('提示', data.message, 'success', false, 3);
+                  window.location.reload();
                 } else {
                   notify('提示', data.message, 'danger');
                 }
