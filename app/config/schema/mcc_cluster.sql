@@ -89,24 +89,6 @@ INSERT INTO `mcc_role` (`id`, `mid`, `name`, `created_at`, `updated_at`, `delete
 INSERT INTO `mcc_role` (`id`, `mid`, `name`, `created_at`, `updated_at`, `deleted_at`) VALUES ('2', '1,2,4', '普通用户', NULL, '2014-07-06 18:36:58', NULL);
 
 -- ----------------------------
--- Table structure for mcc_role_panel
--- ----------------------------
-DROP TABLE IF EXISTS `mcc_role_panel`;
-CREATE TABLE `mcc_role_panel` (
-  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
-  `roleid` tinyint(3) unsigned NOT NULL COMMENT '角色ID',
-  `menuid` smallint(6) unsigned NOT NULL COMMENT '菜单ID',
-  `created_at` datetime DEFAULT NULL,
-  `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `idx_rmid` (`menuid`,`roleid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of mcc_role_panel
--- ----------------------------
-
--- ----------------------------
 -- Table structure for mcc_user
 -- ----------------------------
 DROP TABLE IF EXISTS `mcc_user`;
