@@ -113,6 +113,11 @@ class AccountController extends BaseController
     
     public function logwait()
     {
+        if (is_admin())
+        {
+            return Redirect::intended('/');
+        }
+        
         $this->layout->with('title', '访问后台需管理员审核');
         $this->layout->content = View::make('account.wait');
     }

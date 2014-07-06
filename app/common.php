@@ -1,12 +1,20 @@
 <?php
 ## defined
-defined('USER_ROLE_SUPER_ADMIN') or define('USER_ROLE_SUPER_ADMIN', 127);
-defined('USER_ROLE_ADMIN') or define('USER_ROLE_ADMIN', 126);
+defined('USER_ROLE_SUPER_ADMIN') or define('USER_ROLE_SUPER_ADMIN', 0);
+defined('USER_ROLE_ADMIN') or define('USER_ROLE_ADMIN', 1);
 defined('USER_ROLE_USER') or define('USER_ROLE_USER', 2);
 
 function is_super_admin()
 {
-    if (Auth::check() && Auth::user()->getAuthRoleId() == USER_ROLE_SUPER_ADMIN){
+    if (Auth::check() && in_array(Auth::user()->getAuthRoleId(), array(USER_ROLE_SUPER_ADMIN))){
+        return true;
+    }
+    return false;
+}
+
+function is_admin()
+{
+    if (Auth::check() && in_array(Auth::user()->getAuthRoleId(), array(USER_ROLE_SUPER_ADMIN, USER_ROLE_ADMIN))){
         return true;
     }
     return false;

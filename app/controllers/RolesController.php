@@ -26,7 +26,7 @@ class RolesController extends \BaseController
      * @return Response
      */
     public function create() {
-        //
+        return View::make('manage.roles.create');
     }
 
     /**
@@ -36,7 +36,16 @@ class RolesController extends \BaseController
      * @return Response
      */
     public function store() {
-        //
+        if (is_super_admin()){
+            $res = RoleModel::create(array(
+                'name' => e(Input::get('name')),
+            ));
+            $code = is_object($res) ? 0 : 1;
+        
+            return $this->toJson('创建成功!', $code);
+        } else {
+            return $this->toJson('您没有权限!', 1);
+        }
     }
 
     /**
@@ -58,7 +67,8 @@ class RolesController extends \BaseController
      * @return Response
      */
     public function edit($id) {
-        //
+        $role = RoleModel::find($id)->toArray();
+        return View::make('manage.roles.edit')->with('role', $role);
     }
 
     /**
@@ -69,7 +79,16 @@ class RolesController extends \BaseController
      * @return Response
      */
     public function update($id) {
-        //
+            if (is_super_admin()){
+            $res = RoleModel::where('id', $id)->update(array(
+                'name' => e(Input::get('name')),
+            ));
+            $code = $res > 0 ? 0 : 1;
+            
+            return $this->toJson('更新成功!', $code);
+        } else {
+            return $this->toJson('您没有权限!', 1);
+        }
     }
 
     /**
@@ -80,7 +99,14 @@ class RolesController extends \BaseController
      * @return Response
      */
     public function destroy($id) {
-        //
+        if (is_super_admin()){
+            $res = RoleModel::where('id', $id)->delete();
+            $code = $res > 0 ? 0 : 1;
+        
+            return $this->toJson('删除成功!', $code);
+        } else {
+            return $this->toJson('您没有权限!', 1);
+        }
     }
 
 }

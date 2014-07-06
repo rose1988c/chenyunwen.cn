@@ -1,4 +1,9 @@
 @section('content')
+
+<p>
+    <a class="btn btn-primary" href="{{url('manage/roles/create')}}" data-toggle="modal" data-target="#addModal">添加角色</a>
+</p>
+
 <!-- 普通方式，数据量小的情况 -->
 <div class="table-responsive">
   <table class="table table-bordered table-hover" id="table2">
@@ -16,10 +21,12 @@
             <tr>
             	<td>{{$role['id']}}</td>
             	<td>{{$role['name']}}</td>
+            	<?php if (is_super_admin()){?>
             	<td>
-                    <a href="{{url('manage/role/' . $role['id'], 'edit')}}" data-toggle="modal" data-target="#editModal"><i class="fa fa-pencil"></i></a>
+                    <a href="{{url('manage/roles/' . $role['id'], 'edit')}}" data-toggle="modal" data-target="#editModal"><i class="fa fa-pencil"></i></a>
                     <a href="#deleteModal" rel="{{$role['id']}}" title="{{$role['name']}}" data-toggle="modal" data-target="#deleteModal" class="delete-row"><i class="fa fa-trash-o"></i></a>
                 </td>
+                <?php }?>
             </tr>
             <?php }?>
       </tbody>
@@ -47,6 +54,14 @@
 
 <!-- editModal -->
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog">
+    <div class="modal-content">
+    </div>
+  </div>
+</div>
+
+<!-- addModal -->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
   <div class="modal-dialog">
     <div class="modal-content">
     </div>
@@ -82,7 +97,7 @@
 
       	    $("#deleteModal .modal-footer .btn-primary").off('click').on('click', function(){
 
-      	    var deleteurl = "{{url('manage/role')}}" + "/" + $this.attr('rel');
+      	    var deleteurl = "{{url('manage/roles')}}" + "/" + $this.attr('rel');
       	        $.ajax({
       	    	    url: deleteurl,
         	    	dataType: 'json',

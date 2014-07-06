@@ -54,7 +54,7 @@ Route::filter('auth.manage', function()
     if (Auth::guest()) {
         return Redirect::guest('login');
     } else {
-        if (Auth::user()->roleid < USER_ROLE_ADMIN )
+        if (!is_admin())
         {
             return Redirect::to('logwait');
         }

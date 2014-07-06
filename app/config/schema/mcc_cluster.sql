@@ -78,20 +78,20 @@ INSERT INTO `mcc_menu` VALUES ('8', '7', '角色管理', 'manage/roles', 'fa fa-
 -- ----------------------------
 DROP TABLE IF EXISTS `mcc_role`;
 CREATE TABLE `mcc_role` (
-  `id` tinyint(3) NOT NULL AUTO_INCREMENT,
+  `id` smallint(6) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   `deleted_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=127 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of mcc_role
 -- ----------------------------
 INSERT INTO `mcc_role` VALUES ('2', '普通用户', null, null, null);
-INSERT INTO `mcc_role` VALUES ('126', '管理员', null, null, null);
-INSERT INTO `mcc_role` VALUES ('127', '超级管理员', null, null, null);
+INSERT INTO `mcc_role` VALUES ('1', '管理员', null, null, null);
+INSERT INTO `mcc_role` VALUES ('0', '超级管理员', null, null, null);
 
 -- ----------------------------
 -- Table structure for mcc_role_panel
