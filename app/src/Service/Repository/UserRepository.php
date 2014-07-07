@@ -18,10 +18,19 @@ class UserRepository {
     {
         $meaus = array();
         
-        // 当前用户可赋予的权限
-        $userRoleId = \Auth::user()->getAuthRoleId();
-        $userRole = \RoleModel::find($userRoleId)->toArray();
-        $meaus = explode(',', $userRole['mid']);
+        if (\Auth::check()){
+            // 当前用户可赋予的权限
+            $userRoleId = \Auth::user()->getAuthRoleId();
+            
+            if ($userRoleId == USER_ROLE_SUPER_ADMIN)
+            {
+                $userRole['mid'] = 'all';
+            } else {
+                $userRole = \RoleModel::find($userRoleId)->toArray();
+            }
+            
+            $meaus = explode(',', $userRole['mid']);
+        }
         
         return $meaus;
     }
