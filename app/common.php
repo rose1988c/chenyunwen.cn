@@ -14,7 +14,12 @@ function is_super_admin()
 
 function is_admin()
 {
-    if (Auth::check() && in_array(Auth::user()->getAuthRoleId(), array(USER_ROLE_SUPER_ADMIN, USER_ROLE_ADMIN))){
+    $group_admin = array(
+        USER_ROLE_SUPER_ADMIN,
+        USER_ROLE_ADMIN,
+    );
+    
+    if (Auth::check() && in_array(Auth::user()->getAuthRoleId(), $group_admin)){
         return true;
     }
     return false;
