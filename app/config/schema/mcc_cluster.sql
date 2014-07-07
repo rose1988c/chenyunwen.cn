@@ -85,8 +85,8 @@ ALTER TABLE `mcc_role` ADD INDEX `idx_mid` (`mid`) ;
 -- Records of mcc_role
 -- ----------------------------
 INSERT INTO `mcc_role` (`id`, `mid`, `name`, `created_at`, `updated_at`, `deleted_at`) VALUES ('0', 'all', '超级管理员', NULL, '2014-07-06 17:51:26', NULL);
-INSERT INTO `mcc_role` (`id`, `mid`, `name`, `created_at`, `updated_at`, `deleted_at`) VALUES ('1', '2,4', '管理员', NULL, '2014-07-06 18:00:13', NULL);
-INSERT INTO `mcc_role` (`id`, `mid`, `name`, `created_at`, `updated_at`, `deleted_at`) VALUES ('2', '1,2,4', '普通用户', NULL, '2014-07-06 18:36:58', NULL);
+INSERT INTO `mcc_role` (`id`, `mid`, `name`, `created_at`, `updated_at`, `deleted_at`) VALUES ('1', '', '管理员', NULL, '2014-07-06 18:00:13', NULL);
+INSERT INTO `mcc_role` (`id`, `mid`, `name`, `created_at`, `updated_at`, `deleted_at`) VALUES ('2', '', '普通用户', NULL, '2014-07-06 18:36:58', NULL);
 
 -- ----------------------------
 -- Table structure for mcc_user
