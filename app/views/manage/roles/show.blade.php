@@ -54,8 +54,6 @@
 {{ HTML::script('/assets/package/ztree_v3/js/jquery.ztree.excheck-3.5.js?' . date("Ymd", time()) . '.js') }}
 
 <SCRIPT type="text/javascript">
-	<!--
-
 	function zTreeOnCheck(event, treeId, treeNode) {
 	    var ids = [];
     	var treeObj = $.fn.zTree.getZTreeObj("treeDemo");
@@ -142,5 +140,4 @@
             $("#mid").val(ids);
 		}
 	});
-	//-->
 </SCRIPT>

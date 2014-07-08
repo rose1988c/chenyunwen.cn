@@ -1,8 +1,8 @@
 <?php
 ## defined
-defined('USER_ROLE_SUPER_ADMIN') or define('USER_ROLE_SUPER_ADMIN', 0);
-defined('USER_ROLE_ADMIN') or define('USER_ROLE_ADMIN', 1);
-defined('USER_ROLE_USER') or define('USER_ROLE_USER', 2);
+defined('USER_ROLE_SUPER_ADMIN') or define('USER_ROLE_SUPER_ADMIN', 1);
+defined('USER_ROLE_ADMIN') or define('USER_ROLE_ADMIN', 2);
+defined('USER_ROLE_USER') or define('USER_ROLE_USER', 3);
 
 function is_super_admin()
 {
@@ -14,7 +14,12 @@ function is_super_admin()
 
 function is_admin()
 {
-    if (Auth::check() && in_array(Auth::user()->getAuthRoleId(), array(USER_ROLE_SUPER_ADMIN, USER_ROLE_ADMIN))){
+    $group_admin = array(
+        USER_ROLE_SUPER_ADMIN,
+        USER_ROLE_ADMIN,
+    );
+    
+    if (Auth::check() && in_array(Auth::user()->getAuthRoleId(), $group_admin)){
         return true;
     }
     return false;
