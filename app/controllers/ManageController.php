@@ -11,8 +11,6 @@
 class ManageController extends BaseController
 {
     protected $layout = 'layouts.manage';
-    protected $data = array();
-    
     public function index()
     {
         $this->layout->with('title', '后台管理');
